@@ -8,4 +8,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Cimas.Entities\Cimas.Entities.csproj" />
+    <ProjectReference Include="..\Libraries\Cimas.Service\Cimas.Service.csproj" />
+    <ProjectReference Include="..\Libraries\Cimas.Сommon\Cimas.Сommon.csproj" />
+  </ItemGroup>
+
 </Project>
