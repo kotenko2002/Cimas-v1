@@ -2,7 +2,6 @@
 using Cimas.Entities.Companies;
 using Cimas.Storage.Uow;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,12 +11,10 @@ namespace Cimas.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        private readonly ILogger<TestController> _logger;
         private readonly IUnitOfWork _uow;
 
-        public TestController(ILogger<TestController> logger, IUnitOfWork uow)
+        public TestController(IUnitOfWork uow)
         {
-            _logger = logger;
             _uow = uow;
         }
 

@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cimas.Storage.Configuration.BaseRepository
@@ -12,12 +8,10 @@ namespace Cimas.Storage.Configuration.BaseRepository
     {
         protected CimasDbContext _context;
         protected DbSet<TEntity> Sourse;
-        protected readonly ILogger _logger;
 
-        public BaseRepository(CimasDbContext context, ILogger logger)
+        public BaseRepository(CimasDbContext context)
         {
             _context = context;
-            _logger = logger;
             Sourse = context.Set<TEntity>();
         }
 
