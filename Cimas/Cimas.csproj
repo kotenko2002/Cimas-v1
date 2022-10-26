@@ -14,7 +14,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Cimas.Entities\Cimas.Entities.csproj" />
     <ProjectReference Include="..\Libraries\Cimas.Service\Cimas.Service.csproj" />
+    <ProjectReference Include="..\Libraries\Cimas.Storage\Cimas.Storage.csproj" />
     <ProjectReference Include="..\Libraries\Cimas.Сommon\Cimas.Сommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\Mapper\" />
   </ItemGroup>
 
 </Project>

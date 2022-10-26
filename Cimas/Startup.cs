@@ -1,5 +1,5 @@
+using Cimas.Infrastructure.DependencyInjection;
 using Cimas.Storage.Configuration;
-using Cimas.Storage.Uow;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +23,7 @@ namespace Cimas
             services.AddDbContext<CimasDbContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddCustomServices();
             services.AddControllers();
         }
 
