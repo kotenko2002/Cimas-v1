@@ -1,4 +1,4 @@
-﻿using Cimas.Service.Company;
+﻿using Cimas.Service.Companies;
 using Cimas.Storage.Uow;
 using Microsoft.Extensions.DependencyInjection;
 

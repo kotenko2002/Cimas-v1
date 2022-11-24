@@ -1,5 +1,5 @@
 ﻿using Cimas.Entities.Companies;
-using Cimas.Service.Company;
+using Cimas.Service.Companies;
 using Cimas.Storage.Uow;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

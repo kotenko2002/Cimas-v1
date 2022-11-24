@@ -18,10 +18,15 @@ namespace Cimas.Controllers
             _uow = uow;
         }
 
-        [HttpGet("items")]
+        [HttpGet("company/items")]
         public async Task<IEnumerable<Company>> GetAllCompanies()
         {
             return await _uow.Companies.FindAllAsync();
+        }
+        [HttpGet("area/items")]
+        public async Task<IEnumerable<Area>> GetAllAreas()
+        {
+            return await _uow.Areas.FindAllAsync();
         }
 
         [HttpPost]

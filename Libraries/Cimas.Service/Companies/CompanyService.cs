@@ -1,7 +1,8 @@
-﻿using Cimas.Storage.Uow;
+﻿using Cimas.Entities.Companies;
+using Cimas.Storage.Uow;
 using System.Threading.Tasks;
 
-namespace Cimas.Service.Company
+namespace Cimas.Service.Companies
 {
     public class CompanyService : ICompanyService
     {
@@ -11,7 +12,7 @@ namespace Cimas.Service.Company
         {
             _uow = uow;
         }
-        public async Task<Entities.Companies.Company> GetCompanyByIdAsync(int id)
+        public async Task<Company> GetCompanyByIdAsync(int id)
         {
             return await _uow.Companies.FindAsync(id);
         }
