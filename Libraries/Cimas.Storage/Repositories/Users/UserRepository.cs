@@ -14,6 +14,11 @@ namespace Cimas.Storage.Repositories.Users
 
         }
 
+        public async Task<User> FindByLoginAsync(string login)
+        {
+            return await Sourse.FirstOrDefaultAsync(user => user.Login == login);
+        }
+
         public async Task<bool> UserWithThisLoginExists(string login)
         {
             return await Sourse.FirstOrDefaultAsync(user => user.Login == login) != null;

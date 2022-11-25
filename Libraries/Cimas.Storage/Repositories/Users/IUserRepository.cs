@@ -7,5 +7,6 @@ namespace Cimas.Storage.Repositories.Users
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<bool> UserWithThisLoginExists(string login);
+        Task<User> FindByLoginAsync(string login);
     }
 }

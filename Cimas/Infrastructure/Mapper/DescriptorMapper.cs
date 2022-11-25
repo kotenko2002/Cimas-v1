@@ -9,6 +9,7 @@ namespace Cimas.Infrastructure.Mapper
         public DescriptorMapper()
         {
             CreateMap<RegistrationModel, RegistrationDescriptor>();
+            CreateMap<LoginModel, LoginDescriptor>();
         }
     }
 }

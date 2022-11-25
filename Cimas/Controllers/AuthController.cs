@@ -2,6 +2,7 @@
 using Cimas.Models.Auth;
 using Cimas.Service.Authorization;
 using Cimas.Service.Authorization.Descriptors;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Cimas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -28,7 +30,6 @@ namespace Cimas.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //return BadRequest("Modal is not valid.");
                 throw new Exception("Modal is not valid.");
             }
 
@@ -37,25 +38,18 @@ namespace Cimas.Controllers
             await _authService.AddUserAsync(descriptor);
         }
 
-        //[HttpPost("login")]
-        //public async Task<ActionResult<string>> Login(UserDto model)
-        //{
-        //    var user = _authApiContext.Users.FirstOrDefault(item => item.Username == model.Username);
-        //    if (user == null)
-        //    {
-        //        return BadRequest("User not found.");
-        //    }
+        [HttpPost("login")]
+        public async Task<string> Login(LoginModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new Exception("Modal is not valid.");
+            }
 
-        //    if (!VerifyPasswordHash(model.Password,
-        //            JsonConvert.DeserializeObject<byte[]>(user.PasswordHash),
-        //            JsonConvert.DeserializeObject<byte[]>(user.PasswordSalt)))
-        //    {
-        //        return BadRequest("Wrong password.");
-        //    }
+            var descriptor = _mapper.Map<LoginDescriptor>(model);
+            var token = await _authService.LoginAndGetTokenAsync(descriptor);
 
-        //    string token = CreateToken(user);
-
-        //    return Ok(token);
-        //}
+            return token;
+        }
     }
 }

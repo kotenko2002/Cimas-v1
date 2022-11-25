@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cimas.Entities\Cimas.Entities.csproj" />
     <ProjectReference Include="..\Cimas.Storage\Cimas.Storage.csproj" />
     <ProjectReference Include="..\Cimas.Сommon\Cimas.Сommon.csproj" />

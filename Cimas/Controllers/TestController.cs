@@ -1,6 +1,7 @@
 ﻿using Cimas.Entities.Areas;
 using Cimas.Entities.Companies;
 using Cimas.Storage.Uow;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace Cimas.Controllers
         {
             return await _uow.Companies.FindAllAsync();
         }
-        [HttpGet("area/items")]
+        [HttpGet("area/items"), Authorize]
         public async Task<IEnumerable<Area>> GetAllAreas()
         {
             return await _uow.Areas.FindAllAsync();
