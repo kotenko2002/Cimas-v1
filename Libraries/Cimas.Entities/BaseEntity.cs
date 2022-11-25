@@ -1,7 +1,7 @@
 ﻿namespace Cimas.Entities
 {
-    public class BaseEntity<T>
+    public class BaseEntity
     {
-        public T Id { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,10 +17,6 @@
     <ProjectReference Include="..\Libraries\Cimas.Service\Cimas.Service.csproj" />
     <ProjectReference Include="..\Libraries\Cimas.Storage\Cimas.Storage.csproj" />
     <ProjectReference Include="..\Libraries\Cimas.Сommon\Cimas.Сommon.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Infrastructure\Mapper\" />
   </ItemGroup>
 
 </Project>

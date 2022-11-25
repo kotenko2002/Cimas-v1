@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using System;
 
 namespace Cimas
 {
@@ -23,8 +25,9 @@ namespace Cimas
             services.AddDbContext<CimasDbContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddCustomServices();
             services.AddControllers();
+            services.AddCustomServices();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

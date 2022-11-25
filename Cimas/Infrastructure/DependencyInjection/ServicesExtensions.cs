@@ -1,4 +1,5 @@
-﻿using Cimas.Service.Companies;
+﻿using Cimas.Service.Authorization;
+using Cimas.Service.Companies;
 using Cimas.Storage.Uow;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,7 @@ namespace Cimas.Infrastructure.DependencyInjection
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IAuthService, AuthService>();
             //...
         }
 

@@ -1,4 +1,6 @@
-﻿using Cimas.Entities.Companies;
+﻿using Cimas.Entities.Areas;
+using Cimas.Entities.Companies;
+using Cimas.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cimas.Storage.Configuration
@@ -11,5 +13,7 @@ namespace Cimas.Storage.Configuration
         }
         
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
