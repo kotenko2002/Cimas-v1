@@ -30,6 +30,8 @@ namespace Cimas
 
             services.AddControllers();
 
+            services.AddHttpContextAccessor();//context
+
             #region JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
