@@ -1,8 +1,6 @@
 ﻿using Cimas.Entities.Areas;
 using Cimas.Entities.Companies;
 using Cimas.Сommon.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cimas.Entities.Users

@@ -12,6 +12,16 @@ namespace Cimas.Service.Companies
         {
             _uow = uow;
         }
+
+        public async Task<int> AddCompanyAsync(string name)
+        {
+            Company company = new Company() { Name = name };
+            _uow.Companies.Add(company);
+            await _uow.CompleteAsync();
+
+            return company.Id;
+        }
+
         public async Task<Company> GetCompanyByIdAsync(int id)
         {
             return await _uow.Companies.FindAsync(id);

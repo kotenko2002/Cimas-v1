@@ -5,6 +5,7 @@ namespace Cimas.Service.Companies
 {
     public interface ICompanyService
     {
+        Task<int> AddCompanyAsync(string name);
         Task<Company> GetCompanyByIdAsync(int id);
     }
 }
