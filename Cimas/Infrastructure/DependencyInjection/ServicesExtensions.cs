@@ -17,7 +17,6 @@ namespace Cimas.Infrastructure.DependencyInjection
         {
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IAuthService, AuthService>();
-            //...
         }
 
         public static void AddRepositories(this IServiceCollection repositories)

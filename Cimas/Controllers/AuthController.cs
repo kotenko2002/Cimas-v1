@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [AllowAnonymous]
     public class AuthController : ControllerBase
