@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Cimas.Models.Auth;
+using Cimas.Models.From;
 using Cimas.Service.Authorization.Descriptors;
+using Cimas.Service.Companies.Descriptors;
 
 namespace Cimas.Infrastructure.Mapper
 {
@@ -10,6 +12,7 @@ namespace Cimas.Infrastructure.Mapper
         {
             CreateMap<RegistrationModel, RegistrationDescriptor>();
             CreateMap<LoginModel, LoginDescriptor>();
+            CreateMap<AreaAddModel, AreaAddDescriptor>();
         }
     }
 }
