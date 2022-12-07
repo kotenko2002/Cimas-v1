@@ -7,9 +7,9 @@ namespace Cimas.Storage.Uow
 {
     public interface IUnitOfWork
     {
-        ICompanyRepository Companies { get; }
-        IUserRepository Users { get; }
-        ICinemaRepository Cinemas { get; }
+        ICompanyRepository CompanyRepository { get; }
+        IUserRepository UserRepository { get; }
+        ICinemaRepository CinemaRepository { get; }
         Task CompleteAsync();
     }
 }

@@ -11,17 +11,17 @@ namespace Cimas.Storage.Uow
     {
         private readonly CimasDbContext _context;
 
-        public ICompanyRepository Companies { get; }
-        public IUserRepository Users { get; }
-        public ICinemaRepository Cinemas { get; }//+
+        public ICompanyRepository CompanyRepository { get; }
+        public IUserRepository UserRepository { get; }
+        public ICinemaRepository CinemaRepository { get; }
 
         public UnitOfWork(CimasDbContext context)
         {
             _context = context;
 
-            Companies = new CompanyRepository(_context);
-            Users = new UserRepository(_context);
-            Cinemas = new CinemaRepository(_context);
+            CompanyRepository = new CompanyRepository(_context);
+            UserRepository = new UserRepository(_context);
+            CinemaRepository = new CinemaRepository(_context);
         }
 
         public async Task CompleteAsync()

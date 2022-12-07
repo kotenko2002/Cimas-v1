@@ -26,12 +26,12 @@ namespace Cimas.Service.Authorization
 
         public async Task AddUserAsync(RegistrationDescriptor descriptor)
         {
-            if (await _uow.Users.UserWithThisLoginExists(descriptor.Login))
+            if (await _uow.UserRepository.UserWithThisLoginExists(descriptor.Login))
             {
                 throw new Exception("User with such username is already exist.");
             }
 
-            if(await _uow.Companies.FindAsync(descriptor.CompanyId) == null)
+            if(await _uow.CompanyRepository.FindAsync(descriptor.CompanyId) == null)
             {
                 throw new Exception("Company with such id isn't exist.");
             }
@@ -48,13 +48,13 @@ namespace Cimas.Service.Authorization
                 Role = descriptor.Role
             };
 
-            _uow.Users.Add(user);
+            _uow.UserRepository.Add(user);
             await _uow.CompleteAsync();
         }
 
         public async Task<string> LoginAndGetTokenAsync(LoginDescriptor descriptor)
         {
-            var user = await _uow.Users.FindByLoginAsync(descriptor.Login);
+            var user = await _uow.UserRepository.FindByLoginAsync(descriptor.Login);
             if (user == null)
             {
                 throw new Exception("User not found.");
