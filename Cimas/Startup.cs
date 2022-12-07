@@ -11,6 +11,7 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Cimas.Infrastructure.Middlewares;
 
 namespace Cimas
 {
@@ -58,6 +59,8 @@ namespace Cimas
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
