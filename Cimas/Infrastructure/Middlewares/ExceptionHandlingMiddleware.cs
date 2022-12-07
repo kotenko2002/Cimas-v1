@@ -27,22 +27,17 @@ namespace Cimas.Infrastructure.Middlewares
                 await HandleExceptionAsync(
                     httpContext,
                     ex.Message,
-                    HttpStatusCode.InternalServerError,
-                    "hello man!");
+                    HttpStatusCode.InternalServerError);
             }
         }
 
         private async Task HandleExceptionAsync(
             HttpContext context,
-            string exMsg,
-            HttpStatusCode httpStatusCode,
-
-
-            string message)
+            string message,
+            HttpStatusCode httpStatusCode)
         {
             HttpResponse response = context.Response;
 
-            response.ContentType = "application/json";
             response.StatusCode = (int)httpStatusCode;
 
             ErrorResponse errorResponse = new()
@@ -50,8 +45,6 @@ namespace Cimas.Infrastructure.Middlewares
                 Message = message,
                 StatusCode = (int)httpStatusCode
             };
-
-            //string result = JsonSerializer.Serialize(errorResponse);
 
             await response.WriteAsJsonAsync(errorResponse);
         }
