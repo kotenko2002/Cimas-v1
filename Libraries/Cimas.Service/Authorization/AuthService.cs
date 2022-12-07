@@ -31,6 +31,11 @@ namespace Cimas.Service.Authorization
                 throw new Exception("User with such username is already exist.");
             }
 
+            if(await _uow.Companies.FindAsync(descriptor.CompanyId) == null)
+            {
+                throw new Exception("Company with such id isn't exist.");
+            }
+
             CreatePasswordHash(descriptor.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             User user = new User()

@@ -5,7 +5,8 @@ namespace Cimas.Models.Auth
 {
     public class RegistrationModel
     {
-        public int CompanyId { get; set; }
+        [Required]
+        public int? CompanyId { get; set; }
 
         [MinLength(5)]
         public string Login { get; set; }

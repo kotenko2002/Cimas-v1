@@ -34,7 +34,6 @@ namespace Cimas.Controllers
             }
 
             var descriptor = _mapper.Map<RegistrationDescriptor>(model);
-
             await _authService.AddUserAsync(descriptor);
         }
 
