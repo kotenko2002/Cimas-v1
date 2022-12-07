@@ -1,5 +1,8 @@
 ﻿using Cimas.Storage.Repositories.Cinemas;
 using Cimas.Storage.Repositories.Companies;
+using Cimas.Storage.Repositories.Films;
+using Cimas.Storage.Repositories.Halls;
+using Cimas.Storage.Repositories.Sessions;
 using Cimas.Storage.Repositories.Users;
 using System.Threading.Tasks;
 
@@ -10,6 +13,10 @@ namespace Cimas.Storage.Uow
         ICompanyRepository CompanyRepository { get; }
         IUserRepository UserRepository { get; }
         ICinemaRepository CinemaRepository { get; }
+        IFilmRepository FilmRepository { get; }
+        IHallRepository HallRepository { get; }
+        ISessionRepository SessionRepository { get; }
+        
         Task CompleteAsync();
     }
 }
