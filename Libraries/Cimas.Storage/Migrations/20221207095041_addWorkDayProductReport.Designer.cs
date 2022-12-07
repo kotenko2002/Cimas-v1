@@ -4,14 +4,16 @@ using Cimas.Storage.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cimas.Storage.Migrations
 {
     [DbContext(typeof(CimasDbContext))]
-    partial class CimasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221207095041_addWorkDayProductReport")]
+    partial class addWorkDayProductReport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,32 +107,6 @@ namespace Cimas.Storage.Migrations
                     b.ToTable("Hall");
                 });
 
-            modelBuilder.Entity("Cimas.Entities.Halls.HallSeat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Column")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HallId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Row")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HallId");
-
-                    b.ToTable("HallSeat");
-                });
-
             modelBuilder.Entity("Cimas.Entities.Products.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -218,32 +194,6 @@ namespace Cimas.Storage.Migrations
                     b.HasIndex("HallId");
 
                     b.ToTable("Session");
-                });
-
-            modelBuilder.Entity("Cimas.Entities.Sessions.SessionSeat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Column")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Row")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("SessionSeat");
                 });
 
             modelBuilder.Entity("Cimas.Entities.Users.User", b =>
@@ -349,17 +299,6 @@ namespace Cimas.Storage.Migrations
                     b.Navigation("Cinema");
                 });
 
-            modelBuilder.Entity("Cimas.Entities.Halls.HallSeat", b =>
-                {
-                    b.HasOne("Cimas.Entities.Halls.Hall", "Hall")
-                        .WithMany("HallSeats")
-                        .HasForeignKey("HallId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hall");
-                });
-
             modelBuilder.Entity("Cimas.Entities.Products.Product", b =>
                 {
                     b.HasOne("Cimas.Entities.WorkDays.WorkDay", "WorkDay")
@@ -399,17 +338,6 @@ namespace Cimas.Storage.Migrations
                     b.Navigation("Film");
 
                     b.Navigation("Hall");
-                });
-
-            modelBuilder.Entity("Cimas.Entities.Sessions.SessionSeat", b =>
-                {
-                    b.HasOne("Cimas.Entities.Sessions.Session", "Session")
-                        .WithMany("SessionSeats")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Session");
                 });
 
             modelBuilder.Entity("Cimas.Entities.Users.User", b =>
@@ -465,14 +393,7 @@ namespace Cimas.Storage.Migrations
 
             modelBuilder.Entity("Cimas.Entities.Halls.Hall", b =>
                 {
-                    b.Navigation("HallSeats");
-
                     b.Navigation("Sessions");
-                });
-
-            modelBuilder.Entity("Cimas.Entities.Sessions.Session", b =>
-                {
-                    b.Navigation("SessionSeats");
                 });
 
             modelBuilder.Entity("Cimas.Entities.Users.User", b =>

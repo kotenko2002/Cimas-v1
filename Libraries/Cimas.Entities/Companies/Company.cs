@@ -1,14 +1,16 @@
-﻿using Cimas.Entities.Areas;
+﻿using Cimas.Entities.Cinemas;
+using Cimas.Entities.Films;
+using Cimas.Entities.Users;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Cimas.Entities.Companies
 {
     public class Company : BaseEntity
     {
-        [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Area> Areas { get; set; }
+        public virtual ICollection<Cinema> Cinemas { get; set; }
+        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Film> Films { get; set; }
     }
 }

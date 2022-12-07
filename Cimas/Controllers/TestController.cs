@@ -1,5 +1,4 @@
-﻿using Cimas.Entities.Areas;
-using Cimas.Entities.Companies;
+﻿using Cimas.Entities.Companies;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Storage.Uow;
 using Microsoft.AspNetCore.Authorization;
@@ -27,25 +26,8 @@ namespace Cimas.Controllers
         {
             return await _uow.Companies.FindAllAsync();
         }
-        [HttpGet("area/items"), Authorize]
-        public async Task<IEnumerable<Area>> GetAllAreas()
-        {
-            return await _uow.Areas.FindAllAsync();
-        }
+        
 
-        [HttpPost]
-        public async Task<ActionResult<Area>> CreateArea(Area area)
-        {
-            if (ModelState.IsValid)
-            {
-                _uow.Areas.Add(area);
-                await _uow.CompleteAsync();
-
-                return area;
-            }
-
-            return BadRequest();
-        }
 
         [HttpGet("userlogin"), Authorize]
         public  string GetUserLogin()

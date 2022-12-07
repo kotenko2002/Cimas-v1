@@ -36,7 +36,6 @@ namespace Cimas.Service.Authorization
             User user = new User()
             {
                 CompanyId = descriptor.CompanyId,
-                AreaId = descriptor.AreaId,
                 Login = descriptor.Login,
                 PasswordHash = JsonConvert.SerializeObject(passwordHash),
                 PasswordSalt = JsonConvert.SerializeObject(passwordSalt),
