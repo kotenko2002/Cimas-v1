@@ -1,6 +1,6 @@
-﻿using Cimas.Entities.Sessions;
+﻿using AutoMapper;
+using Cimas.Entities.Sessions;
 using Cimas.Service.Sessions.Descriptors;
-using Cimas.Storage.Repositories.HallSeats;
 using Cimas.Storage.Uow;
 using Cimas.Сommon.Enums;
 using System;
@@ -44,6 +44,35 @@ namespace Cimas.Service.Sessions
                 .ToList();
 
             _unitOfWork.SessionSeatRepository.AddRange(sessionSeatsList);
+            await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task<IEnumerable<SessionSeat>> GetSeatsBySessionIdAsync(int sessionId)
+        {
+            return await _unitOfWork.SessionSeatRepository.GetSeatsBySessionIdAsync(sessionId);
+        }
+
+        public async Task ChangeSessionSeatsStatusAsync(IEnumerable<ChangeSessionSeatsStatusDescriptor> descriptors)
+        {
+            if(descriptors.Any(item => item.SessionId != descriptors.First().SessionId))
+            {
+                throw new Exception("Seats are from differant Sessions.");
+            }
+
+            var sessionSeats = await _unitOfWork.SessionSeatRepository.GetSeatsBySessionIdAsync(descriptors.First().SessionId);
+
+            foreach (var descriptor in descriptors)
+            {
+                var seat = sessionSeats.FirstOrDefault(seat => seat.Column == descriptor.Column && seat.Row == descriptor.Row);
+
+                if (seat == null)
+                {
+                    throw new Exception("No seat with such Colomn or Row.");
+                }
+
+                seat.Status = descriptor.Status;
+            }
+
             await _unitOfWork.CompleteAsync();
         }
     }
