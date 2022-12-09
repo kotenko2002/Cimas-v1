@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Cimas.Entities.Halls;
 using Cimas.Models.From;
+using Cimas.Service.Halls;
+using Cimas.Service.Halls.Descriptors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -14,28 +16,33 @@ namespace Cimas.Controllers
     public class HallController : ControllerBase
     {
         private readonly IMapper _mapper;
-        public HallController(IMapper mapper)
+        private readonly IHallService _hallService;
+        public HallController(
+            IMapper mapper,
+            IHallService hallService)
         {
             _mapper = mapper;
+            _hallService = hallService;
         }
 
         [HttpPost("add")]
-        public async Task AddHall(AddHallModel model)
+        public async Task<int> AddHall(AddHallModel model)
         {
-            // add hall
+            var descriptor = _mapper.Map<AddHallDescriptor>(model);
+
+            return await _hallService.AddHallAsync(descriptor);
         }
 
         [HttpDelete("del")]
         public async Task DeleteHall(int hallId)
         {
-            // delete hall
+            await _hallService.DeleteHallAsync(hallId);
         }
 
         [HttpGet("items/{cinemaId}")]
         public async Task<IEnumerable<Hall>> GetHallsByCinemaId(int cinemaId)
         {
-            return null;
-            // get all halls
+            return await _hallService.GetHallsByCinemaIdAsync(cinemaId);
         }
     }
 }
