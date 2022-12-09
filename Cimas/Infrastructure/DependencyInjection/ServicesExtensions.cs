@@ -1,4 +1,5 @@
 ﻿using Cimas.Service.Authorization;
+using Cimas.Service.Cinemas;
 using Cimas.Service.Companies;
 using Cimas.Service.Halls;
 using Cimas.Service.Sessions;
@@ -21,6 +22,7 @@ namespace Cimas.Infrastructure.DependencyInjection
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IHallService, HallService>();
             services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ICinemaService, CinemaService>(); 
         }
 
         public static void AddRepositories(this IServiceCollection repositories)

@@ -1,4 +1,5 @@
 ﻿using Cimas.Entities.Companies;
+using Cimas.Service.Companies.Descriptors;
 using Cimas.Storage.Uow;
 using System.Threading.Tasks;
 
@@ -13,18 +14,13 @@ namespace Cimas.Service.Companies
             _uow = uow;
         }
 
-        public async Task<int> AddCompanyAsync(string name)
+        public async Task<int> AddCompanyAsync(AddCompanyDescriptor descriptor)
         {
-            Company company = new Company() { Name = name };
+            Company company = new Company() { Name = descriptor.Name };
             _uow.CompanyRepository.Add(company);
             await _uow.CompleteAsync();
 
             return company.Id;
-        }
-
-        public async Task<Company> GetCompanyByIdAsync(int id)
-        {
-            return await _uow.CompanyRepository.FindAsync(id);
         }
     }
 }

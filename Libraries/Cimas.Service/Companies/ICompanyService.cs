@@ -1,11 +1,11 @@
 ﻿using Cimas.Entities.Companies;
+using Cimas.Service.Companies.Descriptors;
 using System.Threading.Tasks;
 
 namespace Cimas.Service.Companies
 {
     public interface ICompanyService
     {
-        Task<int> AddCompanyAsync(string name);
-        Task<Company> GetCompanyByIdAsync(int id);
+        Task<int> AddCompanyAsync(AddCompanyDescriptor descriptor);
     }
 }
