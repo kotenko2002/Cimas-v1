@@ -121,9 +121,6 @@ namespace Cimas.Storage.Migrations
                     b.Property<int>("Row")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("HallId");

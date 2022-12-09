@@ -1,6 +1,6 @@
 ﻿namespace Cimas.Models.From
 {
-    public class CompanyAddModel
+    public class AddCompanyModel
     {
         public string Name { get; set; }
     }

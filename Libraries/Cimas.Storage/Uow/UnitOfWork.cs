@@ -3,7 +3,9 @@ using Cimas.Storage.Repositories.Cinemas;
 using Cimas.Storage.Repositories.Companies;
 using Cimas.Storage.Repositories.Films;
 using Cimas.Storage.Repositories.Halls;
+using Cimas.Storage.Repositories.HallSeats;
 using Cimas.Storage.Repositories.Sessions;
+using Cimas.Storage.Repositories.SessionSeats;
 using Cimas.Storage.Repositories.Users;
 using System;
 using System.Threading.Tasks;
@@ -19,7 +21,9 @@ namespace Cimas.Storage.Uow
         public ICinemaRepository CinemaRepository { get; }
         public IFilmRepository FilmRepository { get; }
         public IHallRepository HallRepository { get; }
+        public IHallSeatRepository HallSeatRepository { get; }
         public ISessionRepository SessionRepository { get; }
+        public ISessionSeatRepository SessionSeatRepository { get; }
 
         public UnitOfWork(CimasDbContext context)
         {
@@ -30,7 +34,9 @@ namespace Cimas.Storage.Uow
             CinemaRepository = new CinemaRepository(_context);
             FilmRepository = new FilmRepository(_context);
             HallRepository = new HallRepository(_context);
+            HallSeatRepository = new HallSeatRepository(_context);
             SessionRepository = new SessionRepository(_context);
+            SessionSeatRepository = new SessionSeatRepository(_context);
         }
 
         public async Task CompleteAsync()

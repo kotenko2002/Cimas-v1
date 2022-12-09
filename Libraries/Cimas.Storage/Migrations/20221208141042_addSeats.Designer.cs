@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cimas.Storage.Migrations
 {
     [DbContext(typeof(CimasDbContext))]
-    [Migration("20221207095441_addSeats")]
+    [Migration("20221208141042_addSeats")]
     partial class addSeats
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,9 +121,6 @@ namespace Cimas.Storage.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Row")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

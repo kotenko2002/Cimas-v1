@@ -9,6 +9,5 @@ namespace Cimas.Entities.Halls
 
         public int Row { get; set; }
         public int Column { get; set; }
-        public SeatStatus Status { get; set; }
     }
 }

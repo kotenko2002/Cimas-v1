@@ -14,8 +14,7 @@ namespace Cimas.Storage.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HallId = table.Column<int>(type: "int", nullable: false),
                     Row = table.Column<int>(type: "int", nullable: false),
-                    Column = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Column = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

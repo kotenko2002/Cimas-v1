@@ -27,7 +27,7 @@ namespace Cimas.Controllers
         }
 
         [HttpPost("add"), AllowAnonymous]
-        public async Task<int> AddCompany(CompanyAddModel model)
+        public async Task<int> AddCompany(AddCompanyModel model)
         {
             return await _companyService.AddCompanyAsync(model.Name);
         }

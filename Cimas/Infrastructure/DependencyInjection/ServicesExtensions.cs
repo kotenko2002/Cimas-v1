@@ -1,5 +1,7 @@
 ﻿using Cimas.Service.Authorization;
 using Cimas.Service.Companies;
+using Cimas.Service.Halls;
+using Cimas.Service.Sessions;
 using Cimas.Storage.Uow;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +19,8 @@ namespace Cimas.Infrastructure.DependencyInjection
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IHallService, HallService>();
+            services.AddScoped<ISessionService, SessionService>();
         }
 
         public static void AddRepositories(this IServiceCollection repositories)

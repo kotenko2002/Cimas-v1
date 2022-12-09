@@ -154,7 +154,6 @@ namespace Cimas.Storage.Configuration
 
                 builder.Property(hs => hs.Row).IsRequired();
                 builder.Property(hs => hs.Column).IsRequired();
-                builder.Property(hs => hs.Status).IsRequired();
             });
 
             modelBuilder.Entity<SessionSeat>(builder =>
