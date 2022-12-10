@@ -36,12 +36,23 @@ namespace Cimas.Controllers
             // delete session
         }
 
-        [HttpGet("bydiapazon")]
-        public async Task<IEnumerable<Session>> GetSessionsByDiapazon(int sessionId)
+        //[HttpGet("items/diapazon")]
+        //public async Task<IEnumerable<Session>> GetSessionsByDiapazon(model)
+        //{
+        //    return null;
+        //    // get sessions by date diapazon (week)
+        //}
+
+        [HttpGet("seats/items")]
+        public async Task<IEnumerable<SessionSeat>> GetSeatsBySessionId(int sessionId)
         {
-            return null;
-            // get sessions by date diapazon (week)
+             return null;
         }
 
+        //[HttpPost("seats/items")]
+        //public async Task ChangeSeatsStatusAsync(model)
+        //{
+
+        //}
     }
 }
