@@ -22,6 +22,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<AddCinemaModel, AddCinemaDescriptor>();
             CreateMap<AddFilmModel, AddFilmDescriptor>();
             CreateMap<SessionsByRangeModel, SessionsByRangeDescriptor>();
+            CreateMap<AddSessionModel, AddSessionDescriptor>();
         }
     }
 }

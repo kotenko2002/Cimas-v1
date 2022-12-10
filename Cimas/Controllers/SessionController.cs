@@ -50,13 +50,13 @@ namespace Cimas.Controllers
             return await _sessionService.GetSessionsByRange(descriptor);
         }
 
-        [HttpGet("seats/items/{sessionId}")]
+        [HttpGet("seat/items/{sessionId}")]
         public async Task<IEnumerable<SessionSeat>> GetSeatsBySessionId(int sessionId)
         {
              return await _sessionService.GetSeatsBySessionIdAsync(sessionId);
         }
 
-        [HttpPost("seats/changeStasus")]
+        [HttpPost("seat/changeStasus")]
         public async Task ChangeSeatsStatusAsync(ChangeSessionSeatsStatusModel model)
         {
             var descriptors = _mapper.Map<IEnumerable<ChangeSessionSeatStatusDescriptor>>(model.Seats);

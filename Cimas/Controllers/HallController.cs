@@ -33,7 +33,7 @@ namespace Cimas.Controllers
             return await _hallService.AddHallAsync(descriptor);
         }
 
-        [HttpDelete("del")]
+        [HttpDelete("del/{hallId}")]
         public async Task DeleteHall(int hallId)
         {
             await _hallService.DeleteHallAsync(hallId);
