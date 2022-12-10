@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "f482afd6-b132-4cb3-bf81-5e9134729699",
+		"name": "Cimas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AuthController",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CompanyId\" : 1,\r\n    \"login\": \"bookpvik2005\",\r\n    \"password\": \"qwerty12348\",\r\n    \"name\": \"Dmytro K.O.\",\r\n    \"Role\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"bookpvik2005\",\r\n    \"password\": \"qwerty12348\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CinemaController",
+			"item": [
+				{
+					"name": "Add cinema",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NDQwOH0.SMGKNHk7XuiO7B2tmYsDkyw51mo3KKxZ--UGBkHDlB0ngMbJjJ_pTKhi-DI9zLdaBvrfZ44gMs5Lxd6rHuHvTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"cool cinema\",\r\n    \"adress\" : \"bebra 59 street\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cinema/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cinema",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cinema",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NDQwOH0.SMGKNHk7XuiO7B2tmYsDkyw51mo3KKxZ--UGBkHDlB0ngMbJjJ_pTKhi-DI9zLdaBvrfZ44gMs5Lxd6rHuHvTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cinema/del/3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cinema",
+								"del",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get company's cinemas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NDQwOH0.SMGKNHk7XuiO7B2tmYsDkyw51mo3KKxZ--UGBkHDlB0ngMbJjJ_pTKhi-DI9zLdaBvrfZ44gMs5Lxd6rHuHvTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cinema/items",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cinema",
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CompanyController",
+			"item": [
+				{
+					"name": "Add company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYm9va3B2aWsyMDA1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiY29tcGFueUFkbWluIiwiZXhwIjoxNjY5NzA3NzQ3fQ.y8HmpB6-2KyzwoVD3K811-bD8WLY-okxnfALm6MsGICMKTF9UUGVGv2fsz_8u_6iJouMJSO6nZmP-EYW86aXaA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Кіновимір 51\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/company/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"company",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FilmController",
+			"item": [
+				{
+					"name": "Add film",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NDk0Nn0.T4x-CdB0B7qkJgUqjPKaqOpoOXWEHEH89itEp04wrYte3vq_fiJoq4_D7pJ69RmnnlD3Ckg-q8e8kr6iYIlMYA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Полісся\",\r\n    \"duration\" : 120\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/film/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"film",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete film",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYm9va3B2aWsyMDA1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiZXhwIjoxNjcwNzUzMDIzfQ.eoPF6SSADXCiqlUmKNAq8tcPrFtymAGH1wzFOZCWaqC_3hXjXJy-hCtdnowjF2qhf7ZIfwphwGH277QmzF_9WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/film/del/3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"film",
+								"del",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get company's films",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/film/items",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"film",
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HallController",
+			"item": [
+				{
+					"name": "Add Hall",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cinemaId\" : 1,\r\n    \"name\" : \"ahll #8\",\r\n    \"rows\" : 2,\r\n    \"coloums\" : 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/hall/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"hall",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Hall",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/hall/del/4",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"hall",
+								"del",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cinema's halls",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/hall/items/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"hall",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SessionController",
+			"item": [
+				{
+					"name": "Add session",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filmId\" : 1,\r\n    \"hallId\" : 3,\r\n    \"ticketPrice\" : 55,\r\n    \"StartDateTime\" : \"2022-12-10T17:16:40\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/session/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"session",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/session/del/16",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"session",
+								"del",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sessions by range",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYm9va3B2aWsyMDA1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiZXhwIjoxNjcwNzUzMDIzfQ.eoPF6SSADXCiqlUmKNAq8tcPrFtymAGH1wzFOZCWaqC_3hXjXJy-hCtdnowjF2qhf7ZIfwphwGH277QmzF_9WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/session/items/byRange?StartDate=12/11/2022 2:08:56 PM",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"session",
+								"items",
+								"byRange"
+							],
+							"query": [
+								{
+									"key": "StartDate",
+									"value": "12/11/2022 2:08:56 PM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sessin's seats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiY29tcGFueUlkIjoiMSIsImV4cCI6MTY3MDc2NTQ4Mn0.Hlwddmvjz3d64kgEA-ew01iRvl7yS8DQaDkI48Pwijn7vnGFal_MzllMG3207lo-5lxPoZr9QCgvmmp6O7bqAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/session/seat/items/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"session",
+								"seat",
+								"items",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change the status of seats in a session",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYm9va3B2aWsyMDA1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ29tcGFueUFkbWluIiwiZXhwIjoxNjcwNzUzMDIzfQ.eoPF6SSADXCiqlUmKNAq8tcPrFtymAGH1wzFOZCWaqC_3hXjXJy-hCtdnowjF2qhf7ZIfwphwGH277QmzF_9WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\" : 2,\r\n    \"seats\": [\r\n        {\r\n            \"Row\" : 0,\r\n            \"Column\" : 1,\r\n            \"Status\" : 1\r\n        },\r\n        {\r\n            \"Row\" : 0,\r\n            \"Column\" : 2,\r\n            \"Status\" : 2\r\n        },\r\n        {\r\n            \"Row\" : 0,\r\n            \"Column\" : 3,\r\n            \"Status\" : 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/session/seat/changeStasus",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"session",
+								"seat",
+								"changeStasus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
