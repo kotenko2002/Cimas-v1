@@ -2,6 +2,7 @@
 using Cimas.Entities.Sessions;
 using Cimas.Models.From;
 using Cimas.Service.Sessions;
+using Cimas.Service.Sessions.Descriptors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -25,34 +26,41 @@ namespace Cimas.Controllers
         }
 
         [HttpPost("add")]
-        public async Task AddSession(AddSessionModel model)
+        public async Task<int> AddSession(AddSessionModel model)
         {
-            // add session
+            var descriptor = _mapper.Map<AddSessionDescriptor>(model);
+            return await _sessionService.AddSessionAsync(descriptor);
         }
 
-        [HttpDelete("del")]
+        [HttpDelete("del/{sessionId}")]
         public async Task DeleteSession(int sessionId)
         {
-            // delete session
+            await _sessionService.DeleteSessionAsync(sessionId);
         }
 
-        //[HttpGet("items/diapazon")]
-        //public async Task<IEnumerable<Session>> GetSessionsByDiapazon(model)
-        //{
-        //    return null;
-        //    // get sessions by date diapazon (week)
-        //}
+        [HttpGet("items/byRange")]
+        public async Task<IEnumerable<Session>> GetSessionsByRange([FromQuery] SessionsByRangeModel model)
+        {
+            if(model.days == null)
+            {
+                model.days = 7;
+            }
 
-        [HttpGet("seats/items")]
+            var descriptor = _mapper.Map<SessionsByRangeDescriptor>(model);
+            return await _sessionService.GetSessionsByRange(descriptor);
+        }
+
+        [HttpGet("seats/items/{sessionId}")]
         public async Task<IEnumerable<SessionSeat>> GetSeatsBySessionId(int sessionId)
         {
-             return null;
+             return await _sessionService.GetSeatsBySessionIdAsync(sessionId);
         }
 
-        //[HttpPost("seats/items")]
-        //public async Task ChangeSeatsStatusAsync(model)
-        //{
-
-        //}
+        [HttpPost("seats/changeStasus")]
+        public async Task ChangeSeatsStatusAsync(ChangeSessionSeatsStatusModel model)
+        {
+            var descriptors = _mapper.Map<IEnumerable<ChangeSessionSeatStatusDescriptor>>(model.Seats);
+            await _sessionService.ChangeSessionSeatsStatusAsync(model.SessionId, descriptors);
+        }
     }
 }

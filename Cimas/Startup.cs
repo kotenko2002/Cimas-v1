@@ -31,7 +31,7 @@ namespace Cimas
 
             services.AddControllers();
 
-            services.AddHttpContextAccessor();//context
+            services.AddHttpContextAccessor();
 
             #region JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -66,7 +66,7 @@ namespace Cimas
 
             app.UseRouting();
 
-            app.UseAuthentication();//jws
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -40,7 +40,7 @@ namespace Cimas.Controllers
             return await _filmService.AddFilmAsync(descriptor);
         }
 
-        [HttpDelete("del")]// from where i can take filmId?
+        [HttpDelete("del/{filmId}")]
         public async Task DeleteFilm(int filmId)
         {
             await _filmService.DeleteFilmAsync(filmId);

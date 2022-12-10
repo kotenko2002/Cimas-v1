@@ -17,10 +17,11 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<RegistrationModel, RegistrationDescriptor>();
             CreateMap<LoginModel, LoginDescriptor>();
             CreateMap<AddHallModel, AddHallDescriptor>();
-            CreateMap<ChangeSessionSeatsStatusModel, ChangeSessionSeatsStatusDescriptor>();
+            CreateMap<ChangeSessionSeatStatusModel, ChangeSessionSeatStatusDescriptor>();
             CreateMap<AddCompanyModel, AddCompanyDescriptor>();
             CreateMap<AddCinemaModel, AddCinemaDescriptor>();
             CreateMap<AddFilmModel, AddFilmDescriptor>();
+            CreateMap<SessionsByRangeModel, SessionsByRangeDescriptor>();
         }
     }
 }

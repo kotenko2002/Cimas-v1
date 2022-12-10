@@ -31,8 +31,6 @@ namespace Cimas.Storage.Configuration
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Company>(builder =>
             {
                 builder.Property(c => c.Name).IsRequired();

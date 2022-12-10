@@ -40,7 +40,7 @@ namespace Cimas.Controllers
             return await _cinemaService.AddCinemaAsync(descriptor);
         }
 
-        [HttpDelete("del")]// from where i can take cinemaId?
+        [HttpDelete("del/{cinemaId}")]
         public async Task DeleteCinema(int cinemaId)
         {
             await _cinemaService.DeleteCinemaAsync(cinemaId);
