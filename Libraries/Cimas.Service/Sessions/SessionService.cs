@@ -92,7 +92,7 @@ namespace Cimas.Service.Sessions
             var filter = new SessionsByRangeFilter()
             {
                 From = descriptor.StartDate,
-                To = descriptor.StartDate.AddDays(descriptor.days - 1),
+                To = descriptor.StartDate.AddDays(descriptor.days),
             };
 
             return await _uow.SessionRepository.GetSessionsByRange(filter);

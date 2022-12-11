@@ -4,6 +4,7 @@ using Cimas.Storage.Configuration.BaseRepository;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Cimas.Storage.Repositories.Users
 {
@@ -22,6 +23,12 @@ namespace Cimas.Storage.Repositories.Users
         public async Task<bool> UserWithThisLoginExists(string login)
         {
             return await Sourse.FirstOrDefaultAsync(user => user.Login == login) != null;
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByCompanyId(int comapnyId)
+        {
+            return await Sourse.Where(user => user.CompanyId == comapnyId && !user.IsFired)
+                .ToListAsync();
         }
     }
 }

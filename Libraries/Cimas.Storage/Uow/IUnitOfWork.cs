@@ -3,6 +3,7 @@ using Cimas.Storage.Repositories.Companies;
 using Cimas.Storage.Repositories.Films;
 using Cimas.Storage.Repositories.Halls;
 using Cimas.Storage.Repositories.HallSeats;
+using Cimas.Storage.Repositories.Products;
 using Cimas.Storage.Repositories.Sessions;
 using Cimas.Storage.Repositories.SessionSeats;
 using Cimas.Storage.Repositories.Users;
@@ -22,7 +23,9 @@ namespace Cimas.Storage.Uow
         ISessionRepository SessionRepository { get; }
         ISessionSeatRepository SessionSeatRepository { get; }
         IWorkDayRepository WorkDayRepository { get; }
+        IProductRepository ProductRepository { get; }
         
+
         Task CompleteAsync();
     }
 }

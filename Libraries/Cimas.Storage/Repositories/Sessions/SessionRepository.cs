@@ -19,7 +19,7 @@ namespace Cimas.Storage.Repositories.Sessions
         public async Task<IEnumerable<Session>> GetSessionsByRange(SessionsByRangeFilter descriptor)
         {
             return await Sourse.Where(item => item.StartDateTime.Date >= descriptor.From.Date
-                && item.EndDateTime.Date <= descriptor.To.Date).ToListAsync();
+                && item.EndDateTime.Date < descriptor.To.Date).ToListAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Cimas.Entities.Users;
 using Cimas.Storage.Configuration.BaseRepository;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cimas.Storage.Repositories.Users
@@ -8,5 +9,6 @@ namespace Cimas.Storage.Repositories.Users
     {
         Task<bool> UserWithThisLoginExists(string login);
         Task<User> FindByLoginAsync(string login);
+        Task<IEnumerable<User>> GetUsersByCompanyId(int comapnyId);
     }
 }

@@ -3,7 +3,9 @@ using Cimas.Service.Cinemas;
 using Cimas.Service.Companies;
 using Cimas.Service.Films;
 using Cimas.Service.Halls;
+using Cimas.Service.Products;
 using Cimas.Service.Sessions;
+using Cimas.Service.Users;
 using Cimas.Service.WorkDays;
 using Cimas.Storage.Uow;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,8 @@ namespace Cimas.Infrastructure.DependencyInjection
             services.AddScoped<ICinemaService, CinemaService>();
             services.AddScoped<IFilmService, FilmService>();
             services.AddScoped<IWorkDayService, WorkDayService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         public static void AddRepositories(this IServiceCollection repositories)
