@@ -7,6 +7,7 @@ using Cimas.Service.Companies.Descriptors;
 using Cimas.Service.Films.Descriptors;
 using Cimas.Service.Halls.Descriptors;
 using Cimas.Service.Sessions.Descriptors;
+using Cimas.Service.WorkDays.Descriptors;
 
 namespace Cimas.Infrastructure.Mapper
 {
@@ -23,6 +24,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<AddFilmModel, AddFilmDescriptor>();
             CreateMap<SessionsByRangeModel, SessionsByRangeDescriptor>();
             CreateMap<AddSessionModel, AddSessionDescriptor>();
+            CreateMap<StartWorkDayModel, StartWorkDayDescriptor>();
         }
     }
 }

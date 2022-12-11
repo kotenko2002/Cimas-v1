@@ -7,6 +7,7 @@ using Cimas.Storage.Repositories.HallSeats;
 using Cimas.Storage.Repositories.Sessions;
 using Cimas.Storage.Repositories.SessionSeats;
 using Cimas.Storage.Repositories.Users;
+using Cimas.Storage.Repositories.WorkDays;
 using System;
 using System.Threading.Tasks;
 
@@ -24,7 +25,8 @@ namespace Cimas.Storage.Uow
         public IHallSeatRepository HallSeatRepository { get; }
         public ISessionRepository SessionRepository { get; }
         public ISessionSeatRepository SessionSeatRepository { get; }
-
+        public IWorkDayRepository WorkDayRepository { get; }
+        
         public UnitOfWork(CimasDbContext context)
         {
             _context = context;
@@ -37,6 +39,7 @@ namespace Cimas.Storage.Uow
             HallSeatRepository = new HallSeatRepository(_context);
             SessionRepository = new SessionRepository(_context);
             SessionSeatRepository = new SessionSeatRepository(_context);
+            WorkDayRepository = new WorkDayRepository(_context);
         }
 
         public async Task CompleteAsync()
