@@ -34,7 +34,7 @@ namespace Cimas.Service.Products
         }
         public async Task EditProductsAsync(int workDayId, IEnumerable<EditProductDescriptor> descriptors)
         {
-            await _uow.ProductRepository.GetProductsByWorkDayIdAsync(workDayId);
+            //await _uow.ProductRepository.GetProductsByWorkDayIdAsync(workDayId);
 
             foreach (var descriptor in descriptors)
             {

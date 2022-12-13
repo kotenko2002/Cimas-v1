@@ -8,5 +8,6 @@ namespace Cimas.Storage.Repositories.Products
     public interface IProductRepository : IBaseRepository<Product>
     {
         Task<IEnumerable<Product>> GetProductsByWorkDayIdAsync(int workDayId);
+        Task<decimal> GetProfitByWorkDayId(int workDayId);
     }
 }

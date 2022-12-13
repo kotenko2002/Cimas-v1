@@ -1,8 +1,12 @@
-﻿using Cimas.Entities.WorkDays;
+﻿using Cimas.Entities.Reports;
+using Cimas.Entities.WorkDays;
 using Cimas.Service.WorkDays.Descriptors;
+using Cimas.Storage.Repositories.Reports.Views;
 using Cimas.Storage.Uow;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 namespace Cimas.Service.WorkDays
 {
@@ -39,7 +43,7 @@ namespace Cimas.Service.WorkDays
         {
             var workDay = await _uow.WorkDayRepository.GetNotFinishedWorkDayOfUserAsync(userId);
 
-            if(workDay == null)
+            if (workDay == null)
             {
                 throw new Exception("User doesn't have not finished workDay.");
             }
@@ -53,6 +57,18 @@ namespace Cimas.Service.WorkDays
 
             workDay.EndDateTime = DateTime.Now;
             await _uow.CompleteAsync();
+        }
+
+        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int cinemaId)
+        {
+            var views = await _uow.ReportRepository.GetReportsListByCompanyIdAsync(cinemaId);
+
+            foreach (var view in views)
+            {
+                view.Profit = await _uow.ProductRepository.GetProfitByWorkDayId(view.WorkDayId);
+            }
+
+            return views;
         }
     }
 }

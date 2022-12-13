@@ -4,14 +4,16 @@ using Cimas.Storage.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cimas.Storage.Migrations
 {
     [DbContext(typeof(CimasDbContext))]
-    partial class CimasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221213171056_fixRroductFields")]
+    partial class fixRroductFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

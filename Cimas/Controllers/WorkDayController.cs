@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Cimas.Entities.Reports;
 using Cimas.Entities.WorkDays;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Models.From;
 using Cimas.Service.WorkDays;
 using Cimas.Service.WorkDays.Descriptors;
+using Cimas.Storage.Repositories.Reports.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cimas.Controllers
@@ -57,6 +60,12 @@ namespace Cimas.Controllers
         public async Task EndWorkDay(int workDayId)
         {
             await _workDayService.EndWorkDayAsync(workDayId);
+        }
+
+        [HttpGet("report/items/{companyId}")]
+        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyId(int companyId)
+        {
+            return await _workDayService.GetReportsListByCompanyIdAsync(companyId);
         }
     }
 }

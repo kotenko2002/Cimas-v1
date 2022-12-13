@@ -19,5 +19,11 @@ namespace Cimas.Storage.Repositories.Products
         {
             return await Sourse.Where(item => item.WorkDayId == workDayId).ToListAsync();
         }
+
+        public async Task<decimal> GetProfitByWorkDayId(int workDayId)
+        {
+            return await Sourse.Where(item => item.WorkDayId == workDayId)
+                .SumAsync(x => x.Price * x.SoldAmount);
+        }
     }
 }
