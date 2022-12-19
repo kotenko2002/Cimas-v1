@@ -62,10 +62,17 @@ namespace Cimas.Controllers
             await _workDayService.EndWorkDayAsync(workDayId);
         }
 
-        [HttpGet("report/items/{companyId}")]
-        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyId(int companyId)
+        [HttpGet("report/items")]
+        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyId()
         {
+            var companyId = _httpContextAccessor.HttpContext.User.GetCompanyId();
             return await _workDayService.GetReportsListByCompanyIdAsync(companyId);
+        }
+
+        [HttpPut("report/setStatus")]
+        public async Task SetReportStatus(EditReportModel model)
+        {
+            
         }
     }
 }

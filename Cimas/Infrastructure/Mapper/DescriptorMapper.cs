@@ -30,6 +30,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<StartWorkDayModel, StartWorkDayDescriptor>();
             CreateMap<AddProductModel, AddProductDescriptor>();
             CreateMap<EditProductModel, EditProductDescriptor>();
+            CreateMap<EditReportModel, EditReportDescriptor>();
 
             CreateMap<User, GetUserResponse>();
         }

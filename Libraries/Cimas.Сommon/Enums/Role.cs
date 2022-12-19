@@ -9,8 +9,7 @@ namespace Cimas.Сommon.Enums
     public enum Role
     {
         Worker = 1,
-        AreaAdmin = 2,
-        Reviewer = 3,
-        CompanyAdmin = 4,
+        Reviewer = 2,
+        CompanyAdmin = 3,
     }
 }

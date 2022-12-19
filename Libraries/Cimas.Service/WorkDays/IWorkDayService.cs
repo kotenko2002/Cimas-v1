@@ -14,5 +14,6 @@ namespace Cimas.Service.WorkDays
         Task<WorkDay> GetNotFinishedWorkDayOfUserAsync(int userId);
         Task EndWorkDayAsync(int workDayId);
         Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int cinemaId);
+        Task EditReportAsync(EditReportDescriptor descriptor);
     }
 }

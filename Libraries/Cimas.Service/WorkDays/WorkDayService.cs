@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using Cimas.Сommon.Enums;
 
 namespace Cimas.Service.WorkDays
 {
@@ -54,8 +55,14 @@ namespace Cimas.Service.WorkDays
         public async Task EndWorkDayAsync(int workDayId)
         {
             var workDay = await _uow.WorkDayRepository.FindAsync(workDayId);
-
             workDay.EndDateTime = DateTime.Now;
+
+            var report = new Report()
+            {
+                WorkDayId = workDayId,
+                Status = RepostStatus.NotReviewed
+            };
+            _uow.ReportRepository.Add(report);
             await _uow.CompleteAsync();
         }
 
@@ -69,6 +76,14 @@ namespace Cimas.Service.WorkDays
             }
 
             return views;
+        }
+
+        public async Task EditReportAsync(EditReportDescriptor descriptor)
+        {
+            var report = await _uow.ReportRepository.FindAsync(descriptor.Id);
+
+            report.Status = descriptor.Status;
+            await _uow.CompleteAsync();
         }
     }
 }

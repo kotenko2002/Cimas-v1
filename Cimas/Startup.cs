@@ -33,6 +33,18 @@ namespace Cimas
 
             services.AddHttpContextAccessor();
 
+            #region CORS
+            services.AddCors(o =>
+            {
+                o.AddPolicy("AllowAll", builder =>
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                );
+            });
+            #endregion
+
             #region JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
@@ -63,6 +75,8 @@ namespace Cimas
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
+            
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
