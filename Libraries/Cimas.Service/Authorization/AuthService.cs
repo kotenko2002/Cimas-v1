@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Cimas.Service.Authorization.Descriptors;
 using Cimas.Entities.Users;
 using Newtonsoft.Json;
+using Cimas.Сommon.Exceptions;
 
 namespace Cimas.Service.Authorization
 {
@@ -28,12 +29,12 @@ namespace Cimas.Service.Authorization
         {
             if (await _uow.UserRepository.UserWithThisLoginExists(descriptor.Login))
             {
-                throw new Exception("User with such username is already exist.");
+                throw new AlreadyExistsException("User with such username is already exist.");
             }
 
             if(await _uow.CompanyRepository.FindAsync(descriptor.CompanyId) == null)
             {
-                throw new Exception("Company with such id isn't exist.");
+                throw new NotFoundException("Company with such id doesn't exist.");
             }
 
             CreatePasswordHash(descriptor.Password, out byte[] passwordHash, out byte[] passwordSalt);

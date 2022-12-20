@@ -28,11 +28,6 @@ namespace Cimas.Controllers
         [HttpPost("register")]
         public async Task Registor(RegistrationModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new Exception("Modal is not valid.");
-            }
-
             var descriptor = _mapper.Map<RegistrationDescriptor>(model);
             await _authService.AddUserAsync(descriptor);
         }
@@ -40,11 +35,6 @@ namespace Cimas.Controllers
         [HttpPost("login")]
         public async Task<string> Login(LoginModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new Exception("Modal is not valid.");
-            }
-
             var descriptor = _mapper.Map<LoginDescriptor>(model);
             var token = await _authService.LoginAndGetTokenAsync(descriptor);
 

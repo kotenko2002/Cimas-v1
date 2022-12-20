@@ -1,6 +1,7 @@
 ﻿using Cimas.Entities.Products;
 using Cimas.Service.Products.Descriptors;
 using Cimas.Storage.Uow;
+using Cimas.Сommon.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace Cimas.Service.Products
 
                 if(product == null)
                 {
-                    throw new Exception("Product with such Id doesn't exist.");
+                    throw new NotFoundException("Product with such Id doesn't exist.");
                 }
 
                 product.Price = descriptor.Price;
@@ -59,7 +60,7 @@ namespace Cimas.Service.Products
             var product = await _uow.ProductRepository.FindAsync(productId);
             if (product == null)
             {
-                throw new Exception("Product with such Id doesn't exist.");
+                throw new NotFoundException("Product with such Id doesn't exist.");
             }
 
             _uow.ProductRepository.Remove(product);

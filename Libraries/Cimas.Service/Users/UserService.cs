@@ -1,5 +1,6 @@
 ﻿using Cimas.Entities.Users;
 using Cimas.Storage.Uow;
+using Cimas.Сommon.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,11 +22,16 @@ namespace Cimas.Service.Users
 
             if(user == null)
             {
-                throw new Exception("User with such Id doesn't exist.");
+                throw new NotFoundException("User with such Id doesn't exist.");
             }
 
             user.IsFired = true;
             await _uow.CompleteAsync();
+        }
+
+        public async Task<User> GetUserInfoAsync(int userId)
+        {
+            return await _uow.UserRepository.FindAsync(userId);
         }
 
         public async Task<IEnumerable<User>> GetUsersByCompanyId(int companyId)

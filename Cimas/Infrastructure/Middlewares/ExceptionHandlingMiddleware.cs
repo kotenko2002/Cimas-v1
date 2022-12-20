@@ -1,4 +1,5 @@
 ﻿using Cimas.Models.Exception;
+using Cimas.Сommon.Exceptions;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Net;
@@ -21,6 +22,20 @@ namespace Cimas.Infrastructure.Middlewares
             try
             {
                 await _next(httpContext);
+            }
+            catch (NotFoundException ex)
+            {
+                await HandleExceptionAsync(
+                    httpContext,
+                    ex.Message,
+                    HttpStatusCode.NotFound);
+            }
+            catch (AlreadyExistsException ex)
+            {
+                await HandleExceptionAsync(
+                    httpContext,
+                    ex.Message,
+                    HttpStatusCode.Forbidden);
             }
             catch (Exception ex)
             {

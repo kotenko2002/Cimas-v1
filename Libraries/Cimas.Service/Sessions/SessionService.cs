@@ -4,6 +4,7 @@ using Cimas.Service.Sessions.Descriptors;
 using Cimas.Storage.Repositories.Sessions.Filter;
 using Cimas.Storage.Uow;
 using Cimas.Сommon.Enums;
+using Cimas.Сommon.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace Cimas.Service.Sessions
             var session = await _uow.SessionRepository.FindAsync(sessionId);
             if (session == null)
             {
-                throw new Exception("Session with such Id doesn't exist.");
+                throw new NotFoundException("Session with such Id doesn't exist.");
             }
 
             _uow.SessionRepository.Remove(session);

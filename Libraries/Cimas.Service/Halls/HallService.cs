@@ -1,6 +1,7 @@
 ﻿using Cimas.Entities.Halls;
 using Cimas.Service.Halls.Descriptors;
 using Cimas.Storage.Uow;
+using Cimas.Сommon.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace Cimas.Service.Halls
 
             if(hall == null)
             {
-                throw new Exception("Hall with such Id doesn't exist.");
+                throw new NotFoundException("Hall with such Id doesn't exist.");
             }
 
             _uow.HallRepository.Remove(hall);

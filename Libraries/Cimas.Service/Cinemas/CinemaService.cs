@@ -1,6 +1,7 @@
 ﻿using Cimas.Entities.Cinemas;
 using Cimas.Service.Cinemas.Descriptors;
 using Cimas.Storage.Uow;
+using Cimas.Сommon.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Cimas.Service.Cinemas
             var company = await _uow.CompanyRepository.FindAsync(descriptor.CompanyId);
             if(company == null)
             {
-                throw new Exception("Company with such Id doesn't exist.");
+                throw new NotFoundException("Company with such Id doesn't exist.");
             }
 
             var cinema = new Cinema()
@@ -42,7 +43,7 @@ namespace Cimas.Service.Cinemas
             var cinema = await _uow.CinemaRepository.FindAsync(cinemaId);
             if(cinema == null)
             {
-                throw new Exception("Cinema with such Id doesn't exist.");
+                throw new NotFoundException("Cinema with such Id doesn't exist.");
             }
 
             _uow.CinemaRepository.Remove(cinema);
