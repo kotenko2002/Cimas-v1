@@ -8,13 +8,13 @@ namespace Cimas.Models.Auth
         [Required]
         public int? CompanyId { get; set; }
 
-        [MinLength(5)]
+        [Required, MinLength(10)]
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
     }
 }

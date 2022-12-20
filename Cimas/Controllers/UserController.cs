@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cimas.Entities.Users;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Models.To;
 using Cimas.Service.Users;
@@ -28,6 +29,15 @@ namespace Cimas.Controllers
             _httpContextAccessor = httpContextAccessor;
             _userService = userService;
             _mapper = mapper;
+        }
+
+        [HttpGet("info")]
+        public async Task<GetUserResponse> GetUserInfo()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var user = await _userService.GetUserInfoAsync(userId);
+
+            return _mapper.Map<GetUserResponse>(user);
         }
 
         [HttpGet("items")]
