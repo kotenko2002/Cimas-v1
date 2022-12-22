@@ -2,6 +2,7 @@
 using Cimas.Entities.Cinemas;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Models.From;
+using Cimas.Models.To;
 using Cimas.Service.Cinemas;
 using Cimas.Service.Cinemas.Descriptors;
 using Microsoft.AspNetCore.Authorization;
@@ -47,10 +48,12 @@ namespace Cimas.Controllers
         }
 
         [HttpGet("items")]
-        public async Task<IEnumerable<Cinema>> GetCinemasByComnapyId()
+        public async Task<IEnumerable<CinemasResponse>> GetCinemasByComnapyId()
         {
             var companyId = _httpContextAccessor.HttpContext.User.GetCompanyId();
-            return await _cinemaService.GetCinemasByComnapyIdAsync(companyId);
+            var cinemas = await _cinemaService.GetCinemasByComnapyIdAsync(companyId);
+
+            return _mapper.Map<IEnumerable<CinemasResponse>>(cinemas);
         }
     }
 }

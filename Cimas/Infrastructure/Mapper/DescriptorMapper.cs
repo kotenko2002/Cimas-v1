@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cimas.Entities.Cinemas;
 using Cimas.Entities.Users;
 using Cimas.Models.Auth;
 using Cimas.Models.From;
@@ -33,6 +34,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<EditReportModel, EditReportDescriptor>();
 
             CreateMap<User, GetUserResponse>();
+            CreateMap<Cinema, CinemasResponse>();
         }
     }
 }
