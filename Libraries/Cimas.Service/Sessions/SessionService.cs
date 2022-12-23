@@ -85,18 +85,14 @@ namespace Cimas.Service.Sessions
             return result;
         }
 
-        public async Task ChangeSessionSeatsStatusAsync
-            (int sessionId, IEnumerable<ChangeSessionSeatStatusDescriptor> descriptors)
+        public async Task ChangeSessionSeatsStatusAsync(IEnumerable<ChangeSessionSeatStatusDescriptor> descriptors)
         {
-            var sessionSeats = await _uow.SessionSeatRepository.GetSeatsBySessionIdAsync(sessionId);
-
             foreach (var descriptor in descriptors)
             {
-                var seat = sessionSeats.FirstOrDefault(seat => seat.Column == descriptor.Column && seat.Row == descriptor.Row);
-
+                var seat = await _uow.SessionSeatRepository.FindAsync(descriptor.Id);
                 if (seat == null)
                 {
-                    throw new Exception("No seat with such Colomn or Row.");
+                    throw new Exception("Seat with such id doesn't exists.");
                 }
 
                 seat.Status = descriptor.Status;
