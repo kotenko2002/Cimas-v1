@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Cimas.Infrastructure.Extensions;
 using Cimas.Models.Auth;
 using Cimas.Service.Authorization;
 using Cimas.Service.Authorization.Descriptors;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -16,19 +18,27 @@ namespace Cimas.Controllers
     {
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthController(
             IAuthService authService,
-            IMapper mapper)
+            IMapper mapper,
+            IHttpContextAccessor httpContextAccessor)
         {
             _authService = authService;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("register")]
         public async Task Registor(RegistrationModel model)
         {
+            if (model.CompanyId == null)
+            {
+                model.CompanyId = _httpContextAccessor.HttpContext.User.GetCompanyId();
+            }
             var descriptor = _mapper.Map<RegistrationDescriptor>(model);
+            
             await _authService.AddUserAsync(descriptor);
         }
 

@@ -61,6 +61,11 @@ namespace Cimas.Service.Authorization
                 throw new Exception("User with such Login not found.");
             }
 
+            if(user.IsFired)
+            {
+                throw new Exception("You have been fired, now you can't log into your account.");
+            }
+
             if (!VerifyPasswordHash(descriptor.Password,
                     JsonConvert.DeserializeObject<byte[]>(user.PasswordHash),
                     JsonConvert.DeserializeObject<byte[]>(user.PasswordSalt)))

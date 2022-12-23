@@ -40,7 +40,7 @@ namespace Cimas.Controllers
             return _mapper.Map<GetUserResponse>(user);
         }
 
-        [HttpGet("items")]
+        [HttpGet("items"), Authorize(Roles = "CompanyAdmin")]
         public async Task<IEnumerable<GetUserResponse>> GetUsersByCompanyId()
         {
             var comapnyId = _httpContextAccessor.HttpContext.User.GetCompanyId();
@@ -49,7 +49,7 @@ namespace Cimas.Controllers
             return _mapper.Map<IEnumerable<GetUserResponse>>(users);
         }
 
-        [HttpPut("fire/{userId}")]
+        [HttpPut("fire/{userId}"), Authorize(Roles = "CompanyAdmin")]
         public async Task FireUser(int userId)
         {
             await _userService.FireUserAsync(userId);
