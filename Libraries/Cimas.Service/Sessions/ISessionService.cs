@@ -9,7 +9,7 @@ namespace Cimas.Service.Sessions
     {
         Task<int> AddSessionAsync(AddSessionDescriptor descriptor);
         Task DeleteSessionAsync(int sessionId);
-        Task<IEnumerable<SessionSeat>> GetSeatsBySessionIdAsync(int sessionId);
+        Task<IEnumerable<IEnumerable<SessionSeat>>> GetSeatsBySessionIdAsync(int sessionId);
         Task<IEnumerable<Session>> GetSessionsByRange(SessionsByRangeDescriptor descriptor);
         Task ChangeSessionSeatsStatusAsync(int sessionId, IEnumerable<ChangeSessionSeatStatusDescriptor> descriptors);
     }

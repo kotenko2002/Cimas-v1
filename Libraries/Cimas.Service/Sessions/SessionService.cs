@@ -59,13 +59,30 @@ namespace Cimas.Service.Sessions
                 throw new NotFoundException("Session with such Id doesn't exist.");
             }
 
+            //TODO: del all seats
             _uow.SessionRepository.Remove(session);
             await _uow.CompleteAsync();
         }
 
-        public async Task<IEnumerable<SessionSeat>> GetSeatsBySessionIdAsync(int sessionId)
+        public async Task<IEnumerable<IEnumerable<SessionSeat>>> GetSeatsBySessionIdAsync(int sessionId)
         {
-            return await _uow.SessionSeatRepository.GetSeatsBySessionIdAsync(sessionId);
+            var seats = await _uow.SessionSeatRepository.GetSeatsBySessionIdAsync(sessionId);
+
+            int minColoumnValue = seats.Min(seat => seat.Column);
+
+            List<List<SessionSeat>> result = new List<List<SessionSeat>>();
+
+            foreach (var item in seats)
+            {
+                if(item.Column == minColoumnValue)
+                {
+                    result.Add(new List<SessionSeat>());
+                }
+
+                result[result.Count - 1].Add(item);
+            }
+
+            return result;
         }
 
         public async Task ChangeSessionSeatsStatusAsync

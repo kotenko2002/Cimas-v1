@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Cimas.Entities.Cinemas;
 using Cimas.Entities.Films;
+using Cimas.Entities.Sessions;
 using Cimas.Entities.Users;
 using Cimas.Models.Auth;
 using Cimas.Models.From;
@@ -37,6 +38,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<User, GetUserResponse>();
             CreateMap<Cinema, CinemasResponse>();
             CreateMap<Film, FilmResponse>();
+            CreateMap<SessionSeat, SessionSeatResponse>();
         }
     }
 }

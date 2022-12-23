@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Cimas.Entities.Sessions;
 using Cimas.Models.From;
+using Cimas.Models.To;
 using Cimas.Service.Sessions;
 using Cimas.Service.Sessions.Descriptors;
 using Microsoft.AspNetCore.Authorization;
@@ -51,9 +52,10 @@ namespace Cimas.Controllers
         }
 
         [HttpGet("seat/items/{sessionId}")]
-        public async Task<IEnumerable<SessionSeat>> GetSeatsBySessionId(int sessionId)
+        public async Task<IEnumerable<IEnumerable<SessionSeatResponse>>> GetSeatsBySessionId(int sessionId)
         {
-             return await _sessionService.GetSeatsBySessionIdAsync(sessionId);
+            var seats =  await _sessionService.GetSeatsBySessionIdAsync(sessionId);
+            return _mapper.Map<IEnumerable<IEnumerable<SessionSeatResponse>>>(seats);
         }
 
         [HttpPost("seat/changeStasus")]
