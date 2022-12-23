@@ -29,7 +29,7 @@ namespace Cimas.Service.Authorization
         {
             if (await _uow.UserRepository.UserWithThisLoginExists(descriptor.Login))
             {
-                throw new AlreadyExistsException("User with such Login is already exist.");
+                throw new NotFoundException("User with such Login is already exist.");
             }
 
             if(await _uow.CompanyRepository.FindAsync(descriptor.CompanyId) == null)

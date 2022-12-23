@@ -32,5 +32,11 @@ namespace Cimas.Controllers
             var descriptor = _mapper.Map<AddCompanyDescriptor>(model);
             return await _companyService.AddCompanyAsync(descriptor);
         }
+
+        [HttpDelete("del/{companyId}"), AllowAnonymous]
+        public async Task DeleteCinema(int companyId)
+        {
+            await _companyService.DeletecompanyAsync(companyId);
+        }
     }
 }

@@ -22,5 +22,13 @@ namespace Cimas.Service.Companies
 
             return company.Id;
         }
+
+        public async Task DeletecompanyAsync(int companyId)
+        {
+            var company = await _uow.CompanyRepository.FindAsync(companyId);
+
+            _uow.CompanyRepository.Remove(company);
+            await _uow.CompleteAsync();
+        }
     }
 }

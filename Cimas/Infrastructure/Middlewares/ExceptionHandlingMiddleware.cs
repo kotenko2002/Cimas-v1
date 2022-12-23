@@ -30,13 +30,6 @@ namespace Cimas.Infrastructure.Middlewares
                     ex.Message,
                     HttpStatusCode.NotFound);
             }
-            catch (AlreadyExistsException ex)
-            {
-                await HandleExceptionAsync(
-                    httpContext,
-                    ex.Message,
-                    HttpStatusCode.Forbidden);
-            }
             catch (Exception ex)
             {
                 await HandleExceptionAsync(

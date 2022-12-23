@@ -7,5 +7,6 @@ namespace Cimas.Service.Companies
     public interface ICompanyService
     {
         Task<int> AddCompanyAsync(AddCompanyDescriptor descriptor);
+        Task DeletecompanyAsync(int companyId);
     }
 }
