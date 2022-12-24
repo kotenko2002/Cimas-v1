@@ -37,7 +37,8 @@ namespace Cimas.Service.WorkDays
 
         public async Task<bool> UserHasNotFinishedWorkDayAsync(int userId)
         {
-            return await _uow.WorkDayRepository.GetNotFinishedWorkDayOfUserAsync(userId) != null;
+            var workday = await _uow.WorkDayRepository.GetNotFinishedWorkDayOfUserAsync(userId);
+            return workday != null;
         }
 
         public async Task<WorkDay> GetNotFinishedWorkDayOfUserAsync(int userId)
