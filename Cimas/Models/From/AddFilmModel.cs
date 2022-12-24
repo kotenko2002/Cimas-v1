@@ -6,7 +6,7 @@ namespace Cimas.Models.From
     {
         [Required]
         public string Name { get; set; }
-        [Required]
-        public double? Duration { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Duration can't be less than 1")]
+        public double Duration { get; set; }
     }
 }

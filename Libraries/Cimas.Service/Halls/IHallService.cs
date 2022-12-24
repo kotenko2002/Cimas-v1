@@ -1,5 +1,6 @@
 ﻿using Cimas.Entities.Halls;
 using Cimas.Service.Halls.Descriptors;
+using Cimas.Storage.Repositories.Halls.Views;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace Cimas.Service.Halls
     {
         Task<int> AddHallAsync(AddHallDescriptor descriptor);
         Task DeleteHallAsync(int hallId);
-        Task<IEnumerable<Hall>> GetHallsByCinemaIdAsync(int cinemaId);
+        Task<IEnumerable<HallView>> GetHallsByCinemaIdAsync(int cinemaId);
 
     }
 }

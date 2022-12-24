@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Cimas.Entities.Halls;
 using Cimas.Models.From;
+using Cimas.Models.To;
 using Cimas.Service.Halls;
 using Cimas.Service.Halls.Descriptors;
+using Cimas.Storage.Repositories.Halls.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -40,7 +42,7 @@ namespace Cimas.Controllers
         }
 
         [HttpGet("items/{cinemaId}")]
-        public async Task<IEnumerable<Hall>> GetHallsByCinemaId(int cinemaId)
+        public async Task<IEnumerable<HallView>> GetHallsByCinemaId(int cinemaId)
         {
             return await _hallService.GetHallsByCinemaIdAsync(cinemaId);
         }

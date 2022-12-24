@@ -1,6 +1,7 @@
 ﻿using Cimas.Entities.Halls;
 using Cimas.Storage.Configuration;
 using Cimas.Storage.Configuration.BaseRepository;
+using Cimas.Storage.Repositories.Halls.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,12 @@ namespace Cimas.Storage.Repositories.Halls
 
         }
 
-        public async Task<IEnumerable<Hall>> GetHallsByCinemaIdAsync(int cinemaId)
+        public async Task<IEnumerable<HallView>> GetHallsByCinemaIdAsync(int cinemaId)
         {
-            return await Sourse.Where(item => item.CinemaId == cinemaId).ToListAsync();
+            return await Sourse.Where(item => item.CinemaId == cinemaId)
+                .Include(item => item.HallSeats)
+                .Select(item => new HallView() { Id = item.Id, Name = item.Name, SeatsCount = item.HallSeats.Count})
+                .ToListAsync();
         }
     }
 }
