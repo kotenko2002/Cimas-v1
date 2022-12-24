@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 using Cimas.Сommon.Enums;
+using Cimas.Сommon.Exceptions;
 
 namespace Cimas.Service.WorkDays
 {
@@ -22,17 +23,23 @@ namespace Cimas.Service.WorkDays
 
         public async Task<int> StartWorkDayAsync(StartWorkDayDescriptor descriptor)
         {
-            WorkDay workDay = new WorkDay()
+            var workday = await _uow.WorkDayRepository.GetNotFinishedWorkDayOfUserAsync(descriptor.UserId);
+            if(workday != null)
+            {
+                throw new BusinessLogicException("User has an unfinished workday");
+            }
+
+            WorkDay newWorkDay = new WorkDay()
             {
                 UserId = descriptor.UserId,
                 CinemaId = descriptor.CinemaId,
                 StartDateTime = DateTime.Now
             };
 
-            _uow.WorkDayRepository.Add(workDay);
+            _uow.WorkDayRepository.Add(newWorkDay);
             await _uow.CompleteAsync();
 
-            return workDay.Id;
+            return newWorkDay.Id;
         }
 
         public async Task<bool> UserHasNotFinishedWorkDayAsync(int userId)

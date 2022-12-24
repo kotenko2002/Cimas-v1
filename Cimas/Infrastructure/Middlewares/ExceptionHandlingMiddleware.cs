@@ -30,6 +30,13 @@ namespace Cimas.Infrastructure.Middlewares
                     ex.Message,
                     HttpStatusCode.NotFound);
             }
+            catch (BusinessLogicException ex)
+            {
+                await HandleExceptionAsync(
+                    httpContext,
+                    ex.Message,
+                    HttpStatusCode.NotFound);
+            }
             catch (Exception ex)
             {
                 await HandleExceptionAsync(

@@ -58,7 +58,7 @@ namespace Cimas.Controllers
             return _mapper.Map<WorkDayReponse>(workday);
         }
 
-        [HttpPost("end"), Authorize(Roles = "Worker")]
+        [HttpPut("end/{workDayId}"), Authorize(Roles = "Worker")]
         public async Task EndWorkDay(int workDayId)
         {
             await _workDayService.EndWorkDayAsync(workDayId);

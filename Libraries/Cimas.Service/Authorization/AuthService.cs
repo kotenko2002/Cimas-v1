@@ -29,7 +29,7 @@ namespace Cimas.Service.Authorization
         {
             if (await _uow.UserRepository.UserWithThisLoginExists(descriptor.Login))
             {
-                throw new NotFoundException("User with such Login is already exist.");
+                throw new BusinessLogicException("User with such Login is already exist.");
             }
 
             if(await _uow.CompanyRepository.FindAsync(descriptor.CompanyId) == null)
@@ -58,19 +58,19 @@ namespace Cimas.Service.Authorization
             var user = await _uow.UserRepository.FindByLoginAsync(descriptor.Login);
             if (user == null)
             {
-                throw new Exception("User with such Login not found.");
+                throw new BusinessLogicException("User with such Login not found.");
             }
 
             if(user.IsFired)
             {
-                throw new Exception("You have been fired, now you can't log into your account.");
+                throw new BusinessLogicException("You have been fired, now you can't log into your account.");
             }
 
             if (!VerifyPasswordHash(descriptor.Password,
                     JsonConvert.DeserializeObject<byte[]>(user.PasswordHash),
                     JsonConvert.DeserializeObject<byte[]>(user.PasswordSalt)))
             {
-                throw new Exception("Wrong password.");
+                throw new BusinessLogicException("Wrong password.");
             }
 
             return CreateToken(user);
