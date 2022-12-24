@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Cimas.Entities.Cinemas;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Models.From;
 using Cimas.Models.To;

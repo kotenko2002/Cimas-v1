@@ -30,7 +30,7 @@ namespace Cimas.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        [HttpPost("register"), AllowAnonymous]
+        [HttpPost("register")]
         public async Task Registor(RegistrationModel model)
         {
             if (model.CompanyId == null)
@@ -42,7 +42,7 @@ namespace Cimas.Controllers
             await _authService.AddUserAsync(descriptor);
         }
 
-        [HttpPost("login"), AllowAnonymous]
+        [HttpPost("login")]
         public async Task<string> Login(LoginModel model)
         {
             var descriptor = _mapper.Map<LoginDescriptor>(model);

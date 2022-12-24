@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Cimas.Entities.Users;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Models.To;
 using Cimas.Service.Users;

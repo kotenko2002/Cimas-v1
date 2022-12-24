@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Cimas.Entities.Reports;
 using Cimas.Entities.WorkDays;
 using Cimas.Infrastructure.Extensions;
 using Cimas.Models.From;

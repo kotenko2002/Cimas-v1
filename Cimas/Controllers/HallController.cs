@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Cimas.Entities.Halls;
 using Cimas.Models.From;
-using Cimas.Models.To;
 using Cimas.Service.Halls;
 using Cimas.Service.Halls.Descriptors;
 using Cimas.Storage.Repositories.Halls.Views;
@@ -12,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "CompanyAdmin")]
     [ApiController]
     [Route("[controller]")]
     public class HallController : ControllerBase
