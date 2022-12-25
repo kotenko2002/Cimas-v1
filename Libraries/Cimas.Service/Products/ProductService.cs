@@ -23,9 +23,6 @@ namespace Cimas.Service.Products
             {
                 WorkDayId = descriptor.WorkDayId,
                 Price = descriptor.Price,
-                Amount = descriptor.Amount,
-                SoldAmount = descriptor.SoldAmount,
-                Incoming = descriptor.Incoming
             };
 
             _uow.ProductRepository.Add(product);
@@ -69,7 +66,7 @@ namespace Cimas.Service.Products
 
         public async Task<IEnumerable<Product>> GetProductsByWorkDayIdAsync(int workDayId)
         {
-            return await GetProductsByWorkDayIdAsync(workDayId);
+            return await _uow.ProductRepository.GetProductsByWorkDayIdAsync(workDayId);
         }
     }
 }

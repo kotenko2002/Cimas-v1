@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using Cimas.Сommon.Enums;
 using Cimas.Сommon.Exceptions;
+using Cimas.Entities.Products;
 
 namespace Cimas.Service.WorkDays
 {
@@ -23,8 +24,8 @@ namespace Cimas.Service.WorkDays
 
         public async Task<int> StartWorkDayAsync(StartWorkDayDescriptor descriptor)
         {
-            var workday = await _uow.WorkDayRepository.GetNotFinishedWorkDayOfUserAsync(descriptor.UserId);
-            if(workday != null)
+            var notFinishedWorkday = await _uow.WorkDayRepository.GetNotFinishedWorkDayOfUserAsync(descriptor.UserId);
+            if(notFinishedWorkday != null)
             {
                 throw new BusinessLogicException("User has an unfinished workday");
             }
@@ -35,6 +36,26 @@ namespace Cimas.Service.WorkDays
                 CinemaId = descriptor.CinemaId,
                 StartDateTime = DateTime.Now
             };
+
+
+            var oldWorkDay = await _uow.WorkDayRepository.GetClosestWorkdayInCinemaByDataTimeAsync(
+                newWorkDay.CinemaId, newWorkDay.StartDateTime);
+
+            if(oldWorkDay != null)
+            {
+                var oldProducts = await _uow.ProductRepository.GetProductsByWorkDayIdAsync(oldWorkDay.Id);
+                var newProducts = oldProducts.Select(item => new Product()
+                {
+                    WorkDay = newWorkDay,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Amount = item.Amount + item.Incoming - item.SoldAmount,
+                    SoldAmount = 0,
+                    Incoming = 0,
+                });
+
+                _uow.ProductRepository.AddRange(newProducts);
+            }
 
             _uow.WorkDayRepository.Add(newWorkDay);
             await _uow.CompleteAsync();

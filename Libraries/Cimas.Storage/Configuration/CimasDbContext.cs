@@ -77,6 +77,11 @@ namespace Cimas.Storage.Configuration
                     .OnDelete(DeleteBehavior.Restrict);
 
                 builder.Property(wd => wd.StartDateTime).IsRequired();
+
+                builder
+                    .HasOne(wd => wd.Report)
+                    .WithOne(r => r.WorkDay)
+                    .HasForeignKey<Report>(r => r.WorkDayId);
             });
 
             modelBuilder.Entity<Product>(builder =>
@@ -95,11 +100,6 @@ namespace Cimas.Storage.Configuration
 
             modelBuilder.Entity<Report>(builder =>
             {
-                builder
-                    .HasOne(r => r.WorkDay)
-                    .WithMany(wk => wk.Reports)
-                    .HasForeignKey(r => r.WorkDayId);
-
                 builder.Property(r => r.Status).IsRequired();
             });
 

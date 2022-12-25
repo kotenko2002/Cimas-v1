@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Cimas.Entities.Products;
 using Cimas.Models.From;
+using Cimas.Models.To;
 using Cimas.Service.Products;
 using Cimas.Service.Products.Descriptors;
 using Microsoft.AspNetCore.Authorization;
@@ -44,10 +45,11 @@ namespace Cimas.Controllers
             await _productService.DeleteProductAsync(productId);
         }
 
-        [HttpGet("items/{workDayId}")]
-        public async Task<IEnumerable<Product>> GetProductsByWorkDayId(int workDayId)
+        [HttpGet("items/{workDayId}"), Authorize(Roles = "Worker")]
+        public async Task<IEnumerable<ProductResponse>> GetProductsByWorkDayId(int workDayId)
         {
-            return await _productService.GetProductsByWorkDayIdAsync(workDayId);
+            var products = await _productService.GetProductsByWorkDayIdAsync(workDayId);
+            return _mapper.Map<IEnumerable<ProductResponse>>(products);
         }
     }
 }

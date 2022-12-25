@@ -7,7 +7,7 @@ namespace Cimas.Models.Auth
     {
         public int? CompanyId { get; set; }
 
-        [Required, MinLength(10)]
+        [Required, MinLength(10, ErrorMessage = "To short Login")]
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }

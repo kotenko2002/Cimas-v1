@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Cimas.Entities.Cinemas;
 using Cimas.Entities.Films;
+using Cimas.Entities.Products;
 using Cimas.Entities.Sessions;
 using Cimas.Entities.Users;
 using Cimas.Entities.WorkDays;
@@ -41,6 +42,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<Film, FilmResponse>();
             CreateMap<SessionSeat, SessionSeatResponse>();
             CreateMap<WorkDay, WorkDayReponse>();
+            CreateMap<Product, ProductResponse>();
         }
     }
 }

@@ -19,6 +19,6 @@ namespace Cimas.Entities.WorkDays
         public DateTime? EndDateTime { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<Report> Reports { get; set; }
+        public Report Report { get; set; }
     }
 }
