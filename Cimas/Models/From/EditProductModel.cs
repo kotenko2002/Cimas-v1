@@ -1,12 +1,19 @@
-﻿namespace Cimas.Models.From
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Cimas.Models.From
 {
     public class EditProductModel
     {
-        public int Id { get; set; }
+        [Required]
+        public int? Id { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Price can't be a negative number")]
         public decimal Price { get; set; }
 
-        public string Amount { get; set; }
-        public string SoldAmount { get; set; }
-        public string Incoming { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Sold can't be a negative number")]
+        public int SoldAmount { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Incomed can't be a negative number")]
+        public int Incoming { get; set; }
     }
 }

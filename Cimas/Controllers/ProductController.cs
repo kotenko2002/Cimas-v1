@@ -33,10 +33,10 @@ namespace Cimas.Controllers
         }
 
         [HttpPut("items/edit")]
-        public async Task EditProducts(int workDayId, EditProductModel[] models)
+        public async Task EditProducts([FromBody] EditProductModel[] models)
         {
             var descriptors = _mapper.Map<IEnumerable<EditProductDescriptor>>(models);
-            await _productService.EditProductsAsync(workDayId, descriptors);
+            await _productService.EditProductsAsync(descriptors);
         }
 
         [HttpDelete("del/{productId}")]

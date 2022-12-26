@@ -30,13 +30,19 @@ namespace Cimas.Service.WorkDays
                 throw new BusinessLogicException("User has an unfinished workday");
             }
 
+            var cinemaNotFinishedWorkday = await _uow.WorkDayRepository.GetNotFinishedWorkDayOfCinemaAsync(descriptor.CinemaId);
+            if(cinemaNotFinishedWorkday != null)
+            {
+                var anotherUser = await _uow.UserRepository.FindAsync(cinemaNotFinishedWorkday.UserId);
+                throw new BusinessLogicException($"{anotherUser.Name} has already started his working day in this cinema");
+            }
+
             WorkDay newWorkDay = new WorkDay()
             {
                 UserId = descriptor.UserId,
                 CinemaId = descriptor.CinemaId,
                 StartDateTime = DateTime.Now
             };
-
 
             var oldWorkDay = await _uow.WorkDayRepository.GetClosestWorkdayInCinemaByDataTimeAsync(
                 newWorkDay.CinemaId, newWorkDay.StartDateTime);

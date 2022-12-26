@@ -20,6 +20,12 @@ namespace Cimas.Storage.Repositories.WorkDays
                 .FirstOrDefaultAsync(item => item.UserId == userId && item.EndDateTime == null);
         }
 
+        public async Task<WorkDay> GetNotFinishedWorkDayOfCinemaAsync(int cinemaId)
+        {
+            return await Sourse
+                .FirstOrDefaultAsync(item => item.CinemaId == cinemaId && item.EndDateTime == null);
+        }
+
         public async Task<WorkDay> GetClosestWorkdayInCinemaByDataTimeAsync(int cinemaId, DateTime dateTime)
         {
             var workdays = await Sourse

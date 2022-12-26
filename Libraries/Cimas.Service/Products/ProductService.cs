@@ -19,9 +19,15 @@ namespace Cimas.Service.Products
 
         public async Task<int> AddProductAsync(AddProductDescriptor descriptor)
         {
+            var workday = await _uow.WorkDayRepository.FindAsync(descriptor.WorkDayId);
+            if(workday == null)
+            {
+                throw new NotFoundException("Workday with such Id doesn't exist");
+            }
             var product = new Product()
             {
                 WorkDayId = descriptor.WorkDayId,
+                Name = descriptor.Name,
                 Price = descriptor.Price,
             };
 
@@ -30,21 +36,23 @@ namespace Cimas.Service.Products
 
             return product.Id;
         }
-        public async Task EditProductsAsync(int workDayId, IEnumerable<EditProductDescriptor> descriptors)
+        public async Task EditProductsAsync(IEnumerable<EditProductDescriptor> descriptors)
         {
-            //await _uow.ProductRepository.GetProductsByWorkDayIdAsync(workDayId);
-
             foreach (var descriptor in descriptors)
             {
                 var product = await _uow.ProductRepository.FindAsync(descriptor.Id);
 
                 if(product == null)
                 {
-                    throw new NotFoundException("Product with such Id doesn't exist.");
+                    throw new NotFoundException("Product with such Id doesn't exist");
+                }
+
+                if(product.Amount + descriptor.Incoming - descriptor.SoldAmount < 0)
+                {
+                    throw new BusinessLogicException("Sold cannot be more than Amount + Incomed");
                 }
 
                 product.Price = descriptor.Price;
-                product.Amount = descriptor.Amount;
                 product.SoldAmount = descriptor.SoldAmount;
                 product.Incoming = descriptor.Incoming;
             }

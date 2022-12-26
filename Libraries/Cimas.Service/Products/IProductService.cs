@@ -8,7 +8,7 @@ namespace Cimas.Service.Products
     public interface IProductService
     {
         Task<int> AddProductAsync(AddProductDescriptor descriptor);
-        Task EditProductsAsync(int workDayId, IEnumerable<EditProductDescriptor> descriptors);
+        Task EditProductsAsync(IEnumerable<EditProductDescriptor> descriptors);
         Task DeleteProductAsync(int productId);
         Task<IEnumerable<Product>> GetProductsByWorkDayIdAsync(int workDayId);
     }
