@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Authorize(Roles = "CompanyAdmin")]
+    [Authorize(Roles = "CompanyAdmin,Worker")]
     [ApiController]
     [Route("[controller]")]
     public class FilmController : ControllerBase
@@ -32,7 +32,7 @@ namespace Cimas.Controllers
             _filmService = filmService;
         }
 
-        [HttpPost("add")]
+        [HttpPost("add"), Authorize(Roles = "CompanyAdmin")]
         public async Task<int> AddFilm(AddFilmModel model)
         {
             var descriptor = _mapper.Map<AddFilmDescriptor>(model);
@@ -41,7 +41,7 @@ namespace Cimas.Controllers
             return await _filmService.AddFilmAsync(descriptor);
         }
 
-        [HttpDelete("del/{filmId}")]
+        [HttpDelete("del/{filmId}"), Authorize(Roles = "CompanyAdmin")]
         public async Task DeleteFilm(int filmId)
         {
             await _filmService.DeleteFilmAsync(filmId);

@@ -4,6 +4,7 @@ using Cimas.Models.From;
 using Cimas.Models.To;
 using Cimas.Service.Sessions;
 using Cimas.Service.Sessions.Descriptors;
+using Cimas.Storage.Repositories.Sessions.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -39,16 +40,12 @@ namespace Cimas.Controllers
             await _sessionService.DeleteSessionAsync(sessionId);
         }
 
-        [HttpGet("items/byRange")]
-        public async Task<IEnumerable<Session>> GetSessionsByRange([FromQuery] SessionsByRangeModel model)
+        [HttpGet("items")]
+        public async Task<IEnumerable<SessionResponse>> GetSessions([FromQuery] SessionsByRangeModel model)
         {
-            if(model.days == null)
-            {
-                model.days = 7;
-            }
-
             var descriptor = _mapper.Map<SessionsByRangeDescriptor>(model);
-            return await _sessionService.GetSessionsByRange(descriptor);
+            var sessions = await _sessionService.GetSessionsByDateAndHallId(descriptor);
+            return _mapper.Map<IEnumerable<SessionResponse>>(sessions);
         }
 
         [HttpGet("seat/items/{sessionId}")]

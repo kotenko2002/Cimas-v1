@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cimas.Models.From
 {
     public class SessionsByRangeModel
     {
-        public DateTime StartDate { get; set; }
-        public int? days { get; set; }
+        [Required]
+        public int? HallId { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
     }
 }

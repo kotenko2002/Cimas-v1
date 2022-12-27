@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Authorize(Roles = "CompanyAdmin")]
+    [Authorize(Roles = "CompanyAdmin,Worker")]
     [ApiController]
     [Route("[controller]")]
     public class HallController : ControllerBase
@@ -25,7 +25,7 @@ namespace Cimas.Controllers
             _hallService = hallService;
         }
 
-        [HttpPost("add")]
+        [HttpPost("add"), Authorize(Roles = "CompanyAdmin")]
         public async Task<int> AddHall(AddHallModel model)
         {
             var descriptor = _mapper.Map<AddHallDescriptor>(model);
@@ -33,7 +33,7 @@ namespace Cimas.Controllers
             return await _hallService.AddHallAsync(descriptor);
         }
 
-        [HttpDelete("del/{hallId}")]
+        [HttpDelete("del/{hallId}"), Authorize(Roles = "CompanyAdmin")]
         public async Task DeleteHall(int hallId)
         {
             await _hallService.DeleteHallAsync(hallId);

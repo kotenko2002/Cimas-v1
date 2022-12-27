@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Cimas.Entities.Sessions;
+﻿using Cimas.Entities.Sessions;
 using Cimas.Service.Sessions.Descriptors;
-using Cimas.Storage.Repositories.Sessions.Filter;
+using Cimas.Storage.Repositories.Sessions.Views;
 using Cimas.Storage.Uow;
 using Cimas.Сommon.Enums;
 using Cimas.Сommon.Exceptions;
@@ -92,7 +91,7 @@ namespace Cimas.Service.Sessions
                 var seat = await _uow.SessionSeatRepository.FindAsync(descriptor.Id);
                 if (seat == null)
                 {
-                    throw new Exception("Seat with such id doesn't exists.");
+                    throw new Exception("Seat with such id doesn't exists");
                 }
 
                 seat.Status = descriptor.Status;
@@ -101,15 +100,23 @@ namespace Cimas.Service.Sessions
             await _uow.CompleteAsync();
         }
 
-        public async Task<IEnumerable<Session>> GetSessionsByRange(SessionsByRangeDescriptor descriptor)
+        public async Task<IEnumerable<SessionView>> GetSessionsByDateAndHallId(SessionsByRangeDescriptor descriptor)
         {
-            var filter = new SessionsByRangeFilter()
-            {
-                From = descriptor.StartDate,
-                To = descriptor.StartDate.AddDays(descriptor.days),
-            };
+            var sessions =  await _uow.SessionRepository.GetSessionsByDateAndHallId(descriptor.Date, descriptor.HallId);
 
-            return await _uow.SessionRepository.GetSessionsByRange(filter);
+            foreach (var session in sessions)
+            {
+                var film = await _uow.FilmRepository.FindAsync(session.FilmId);
+
+                if(film == null)
+                {
+                    throw new Exception("Film with such id doesn't exists");
+                }
+
+                session.FilmName = film.Name;
+            }
+
+            return sessions;
         }
     }
 }

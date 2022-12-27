@@ -16,6 +16,7 @@ using Cimas.Service.Halls.Descriptors;
 using Cimas.Service.Products.Descriptors;
 using Cimas.Service.Sessions.Descriptors;
 using Cimas.Service.WorkDays.Descriptors;
+using Cimas.Storage.Repositories.Sessions.Views;
 
 namespace Cimas.Infrastructure.Mapper
 {
@@ -43,6 +44,10 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<SessionSeat, SessionSeatResponse>();
             CreateMap<WorkDay, WorkDayReponse>();
             CreateMap<Product, ProductResponse>();
+
+            CreateMap<SessionView, SessionResponse>()
+                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartDateTime.ToString("HH:mm")))
+                .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndDateTime.ToString("HH:mm")));
         }
     }
 }
