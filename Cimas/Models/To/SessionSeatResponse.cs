@@ -10,5 +10,7 @@ namespace Cimas.Models.To
         public int Row { get; set; }
         public int Column { get; set; }
         public SeatStatus Status { get; set; }
+
+        public bool Changed { get; set; } = false;
     }
 }

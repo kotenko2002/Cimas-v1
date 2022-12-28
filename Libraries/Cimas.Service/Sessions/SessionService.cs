@@ -86,6 +86,7 @@ namespace Cimas.Service.Sessions
 
         public async Task ChangeSessionSeatsStatusAsync(IEnumerable<ChangeSessionSeatStatusDescriptor> descriptors)
         {
+            var currentDataTime = DateTime.Now;
             foreach (var descriptor in descriptors)
             {
                 var seat = await _uow.SessionSeatRepository.FindAsync(descriptor.Id);
@@ -95,6 +96,11 @@ namespace Cimas.Service.Sessions
                 }
 
                 seat.Status = descriptor.Status;
+
+                if(seat.Status == SeatStatus.Occupied)
+                {
+                    seat.DateTime = currentDataTime;
+                }
             }
 
             await _uow.CompleteAsync();

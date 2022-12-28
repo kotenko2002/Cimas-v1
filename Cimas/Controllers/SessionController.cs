@@ -55,7 +55,7 @@ namespace Cimas.Controllers
             return _mapper.Map<IEnumerable<IEnumerable<SessionSeatResponse>>>(seats);
         }
 
-        [HttpPost("seat/changeStasus")]
+        [HttpPut("seat/changeStatus")]
         public async Task ChangeSeatsStatusAsync(ChangeSessionSeatStatusModel[] models)
         {
             var descriptors = _mapper.Map<IEnumerable<ChangeSessionSeatStatusDescriptor>>(models);
