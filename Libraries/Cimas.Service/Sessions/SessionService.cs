@@ -1,5 +1,6 @@
 ﻿using Cimas.Entities.Sessions;
 using Cimas.Service.Sessions.Descriptors;
+using Cimas.Storage.Repositories.Sessions.Filters;
 using Cimas.Storage.Repositories.Sessions.Views;
 using Cimas.Storage.Uow;
 using Cimas.Сommon.Enums;
@@ -33,11 +34,23 @@ namespace Cimas.Service.Sessions
                 TicketPrice = descriptor.TicketPrice
             };
 
+            var filter = new SessionCollisionsFilter()
+            {
+                HallId = session.HallId,
+                StartDateTime = session.StartDateTime,
+                EndDateTime = session.EndDateTime
+            };
+
+            if(await _uow.SessionRepository.IsAnotherSessionInHall(filter))
+            {
+                throw new BusinessLogicException("There is another session in this hall at this time");
+            }
+
             var hallSeatsList = await _uow.HallSeatRepository.GetAllSeatsByHallId(session.HallId);
 
             if(hallSeatsList.Count() == 0)
             {
-                throw new Exception("Hall doesn't contain any seat.");
+                throw new BusinessLogicException("Hall doesn't contain any seat");
             }
 
             var sessionSeatsList = hallSeatsList
@@ -58,7 +71,6 @@ namespace Cimas.Service.Sessions
                 throw new NotFoundException("Session with such Id doesn't exist.");
             }
 
-            //TODO: del all seats
             _uow.SessionRepository.Remove(session);
             await _uow.CompleteAsync();
         }

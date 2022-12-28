@@ -1,5 +1,6 @@
 ﻿using Cimas.Entities.Sessions;
 using Cimas.Storage.Configuration.BaseRepository;
+using Cimas.Storage.Repositories.Sessions.Filters;
 using Cimas.Storage.Repositories.Sessions.Views;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace Cimas.Storage.Repositories.Sessions
     public interface ISessionRepository : IBaseRepository<Session>
     {
         Task<IEnumerable<SessionView>> GetSessionsByDateAndHallId(DateTime dataTime, int hallId);
+        Task<bool> IsAnotherSessionInHall(SessionCollisionsFilter filter);
     }
 }

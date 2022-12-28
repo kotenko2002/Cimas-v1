@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Worker")]
     [ApiController]
     [Route("[controller]")]
     public class ProductController : ControllerBase
@@ -45,7 +45,7 @@ namespace Cimas.Controllers
             await _productService.DeleteProductAsync(productId);
         }
 
-        [HttpGet("items/{workDayId}"), Authorize(Roles = "Worker")]
+        [HttpGet("items/{workDayId}")]
         public async Task<IEnumerable<ProductResponse>> GetProductsByWorkDayId(int workDayId)
         {
             var products = await _productService.GetProductsByWorkDayIdAsync(workDayId);

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Worker")]
     [ApiController]
     [Route("[controller]")]
     public class SessionController : ControllerBase

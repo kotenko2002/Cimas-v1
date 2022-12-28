@@ -1,6 +1,7 @@
 ﻿using Cimas.Entities.Sessions;
 using Cimas.Storage.Configuration;
 using Cimas.Storage.Configuration.BaseRepository;
+using Cimas.Storage.Repositories.Sessions.Filters;
 using Cimas.Storage.Repositories.Sessions.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,7 +30,15 @@ namespace Cimas.Storage.Repositories.Sessions
                     EndDateTime = item.EndDateTime,
                     TicketPrice = item.TicketPrice,
                 })
+                .OrderBy(item => item.StartDateTime)
                 .ToListAsync();
+        }
+
+        public async Task<bool> IsAnotherSessionInHall(SessionCollisionsFilter filter)
+        {
+            return await Sourse.Where(item => item.HallId == filter.HallId)
+                .AnyAsync(item => item.StartDateTime < filter.EndDateTime
+                    && filter.StartDateTime < item.EndDateTime);
         }
     }
 }
