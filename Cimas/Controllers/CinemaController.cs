@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Cimas.Controllers
 {
-    [Authorize(Roles = "CompanyAdmin,Worker")]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CinemaController : ControllerBase

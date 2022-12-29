@@ -11,6 +11,7 @@ using Cimas.Сommon.Enums;
 using Cimas.Сommon.Exceptions;
 using Cimas.Entities.Products;
 using Cimas.Storage.Repositories.SessionSeats.Filters;
+using Cimas.Service.WorkDays.Views;
 
 namespace Cimas.Service.WorkDays
 {
@@ -102,32 +103,55 @@ namespace Cimas.Service.WorkDays
             await _uow.CompleteAsync();
         }
 
-        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int companyId)
+        public async Task<FullReportView> GetFullReportByReportId(int reportId)
         {
-            var views = await _uow.ReportRepository.GetReportsListByCompanyIdAsync(companyId);
+            var report = await _uow.ReportRepository.GetFullReportByReportId(reportId);
 
-            foreach (var view in views)
+            if(report == null)
             {
-                view.Profit = await _uow.ProductRepository.GetProfitByWorkDayId(view.WorkDayId);
-
-                var filter = new CountProfitFilter()
-                {
-                    CinemaId = view.CinemaId,
-                    StartDateTime = view.StartDateTime,
-                    EndDateTime = view.EndDateTime
-                };
-                view.Profit += await _uow.SessionSeatRepository.GetProfit(filter);
+                throw new NotFoundException("Report with such Id doesn't exist");
             }
 
-            return views;
+            var view = new FullReportView()
+            {
+                Id = report.Id,
+                CinemaName = report.WorkDay.Cinema.Name,
+                CinemaAdress = report.WorkDay.Cinema.Adress,
+                WorkerName = report.WorkDay.User.Name,
+                StartDateTime = report.WorkDay.StartDateTime,
+                EndDateTime = (System.DateTime)report.WorkDay.EndDateTime,
+                Status = report.Status,
+            };
+
+            view.Profit += await _uow.ProductRepository.GetProfitByWorkDayId(report.WorkDayId);
+
+            var filter = new CountProfitFilter()
+            {
+                CinemaId = report.WorkDay.CinemaId,
+                StartDateTime = view.StartDateTime,
+                EndDateTime = view.EndDateTime
+            };
+            view.Profit += await _uow.SessionSeatRepository.GetProfit(filter);
+
+            return view;
         }
 
         public async Task EditReportAsync(EditReportDescriptor descriptor)
         {
             var report = await _uow.ReportRepository.FindAsync(descriptor.Id);
 
+            if (report == null)
+            {
+                throw new NotFoundException("Report with such Id doesn't exist");
+            }
+
             report.Status = descriptor.Status;
             await _uow.CompleteAsync();
+        }
+
+        public async Task<IEnumerable<ShortReportForReviewerView>> GetShortReportsByCinemaId(int cinemaId)
+        {
+            return await _uow.ReportRepository.GetShortReportsByCinemaId(cinemaId);
         }
     }
 }

@@ -16,28 +16,70 @@ namespace Cimas.Storage.Repositories.Reports
         {
         }
 
-        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int companyId)
+        public async Task<Report> GetFullReportByReportId(int reportId)
+        {
+            return await Sourse
+                .Include(report => report.WorkDay)
+                    .ThenInclude(workDay => workDay.Cinema)
+                .Include(report => report.WorkDay)
+                    .ThenInclude(workDay => workDay.User)
+                .FirstOrDefaultAsync(item => item.Id == reportId);
+
+            
+
+            //var temp = await Sourse
+            //    .Include(report => report.WorkDay)
+            //        .ThenInclude(workDay => workDay.Cinema)
+            //    .Where(report => report.WorkDay.Cinema.CompanyId == companyId)
+            //    .Include(report => report.WorkDay)
+            //        .ThenInclude(workDay => workDay.User)
+            //    .Select(report => new FullReportView()
+            //    {
+            //        Id = report.Id,
+            //        WorkDayId = report.WorkDayId,
+            //        CinemaId = report.WorkDay.CinemaId,
+            //        CinemaName = report.WorkDay.Cinema.Name,
+            //        CinemaAdress = report.WorkDay.Cinema.Adress,
+            //        WorkerName = report.WorkDay.User.Name,
+            //        StartDateTime = report.WorkDay.StartDateTime,
+            //        EndDateTime = (System.DateTime)report.WorkDay.EndDateTime,
+            //        Status = report.Status,
+            //    }).ToListAsync();
+
+        }
+
+        public async Task<IEnumerable<ShortReportForReviewerView>> GetShortReportsByCinemaId(int cinemaId)
         {
             var temp = await Sourse
                 .Include(report => report.WorkDay)
-                    .ThenInclude(workDay => workDay.Cinema)
-                .Where(report => report.WorkDay.Cinema.CompanyId == companyId)
-                .Include(report => report.WorkDay)
-                    .ThenInclude(workDay => workDay.User)
-                .Select(report => new FullReportView()
+                .Where(report => report.WorkDay.CinemaId == cinemaId)
+                .Select(report => new ShortReportForReviewerView()
                 {
                     Id = report.Id,
-                    WorkDayId = report.WorkDayId,
-                    CinemaId = report.WorkDay.CinemaId,
-                    CinemaName = report.WorkDay.Cinema.Name,
-                    WorkerName = report.WorkDay.User.Name,
-                    WorkerRole = report.WorkDay.User.Role,
                     StartDateTime = report.WorkDay.StartDateTime,
                     EndDateTime = (System.DateTime)report.WorkDay.EndDateTime,
-                    Status = report.Status,
+                    Status = report.Status
                 }).ToListAsync();
 
             return temp;
         }
     }
 }
+
+//.Include(report => report.WorkDay)
+//                    .ThenInclude(workDay => workDay.Cinema)
+//                .Where(report => report.WorkDay.Cinema.CompanyId == companyId)
+//                .Include(report => report.WorkDay)
+//                    .ThenInclude(workDay => workDay.User)
+//                .Select(report => new FullReportView()
+//                {
+//                    Id = report.Id,
+//                    WorkDayId = report.WorkDayId,
+//                    CinemaId = report.WorkDay.CinemaId,
+//                    CinemaName = report.WorkDay.Cinema.Name,
+//                    CinemaAdress = report.WorkDay.Cinema.Adress,
+//                    WorkerName = report.WorkDay.User.Name,
+//                    StartDateTime = report.WorkDay.StartDateTime,
+//                    EndDateTime = (System.DateTime)report.WorkDay.EndDateTime,
+//                    Status = report.Status,
+//                }).ToListAsync();

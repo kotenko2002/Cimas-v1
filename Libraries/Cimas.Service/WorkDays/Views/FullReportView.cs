@@ -1,16 +1,14 @@
 ﻿using Cimas.Сommon.Enums;
 using System;
 
-namespace Cimas.Storage.Repositories.Reports.Views
+namespace Cimas.Service.WorkDays.Views
 {
     public class FullReportView
     {
         public int Id { get; set; }
-        public int WorkDayId { get; set; }
-        public int CinemaId { get; set; }
         public string CinemaName { get; set; }
+        public string CinemaAdress { get; set; }
         public string WorkerName { get; set; }
-        public Role WorkerRole { get; set; }
         public decimal Profit { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }

@@ -5,6 +5,7 @@ using Cimas.Models.From;
 using Cimas.Models.To;
 using Cimas.Service.WorkDays;
 using Cimas.Service.WorkDays.Descriptors;
+using Cimas.Service.WorkDays.Views;
 using Cimas.Storage.Repositories.Reports.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -64,17 +65,38 @@ namespace Cimas.Controllers
             await _workDayService.EndWorkDayAsync(workDayId);
         }
 
-        [HttpGet("report/items"), Authorize(Roles = "Reviewer")]
-        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyId()
+        //[HttpGet("report/items/{cinemaId}"), Authorize(Roles = "Reviewer")]
+        //public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyId()
+        //{
+        //    var companyId = _httpContextAccessor.HttpContext.User.GetCompanyId();
+        //    return await _workDayService.GetReportsListByCompanyIdAsync(companyId);
+        //}
+
+        //[HttpPut("report/setStatus"), Authorize(Roles = "Reviewer")]
+        //public async Task SetReportStatus(EditReportModel model)
+        //{
+        //    //TODO: implement йопта!
+        //}
+
+        [HttpGet("report/short/rev/items/{cinemaId}"), Authorize(Roles = "Reviewer")]
+        public async Task<IEnumerable<ShortReportForReviewerResponse>> GetShortReportsByCinemaId(int cinemaId)
         {
-            var companyId = _httpContextAccessor.HttpContext.User.GetCompanyId();
-            return await _workDayService.GetReportsListByCompanyIdAsync(companyId);
+            var reports = await _workDayService.GetShortReportsByCinemaId(cinemaId);
+            return _mapper.Map<IEnumerable<ShortReportForReviewerResponse>>(reports);
+        }
+
+        [HttpGet("report/full/rev/{reportId}"), Authorize(Roles = "Reviewer")]
+        public async Task<FullReportResponse> GetFullReportByReportId(int reportId)
+        {
+            var fullReport = await _workDayService.GetFullReportByReportId(reportId);
+            return _mapper.Map<FullReportResponse>(fullReport);
         }
 
         [HttpPut("report/setStatus"), Authorize(Roles = "Reviewer")]
         public async Task SetReportStatus(EditReportModel model)
         {
-            //TODO: implement йопта!
+            var descriptor = _mapper.Map<EditReportDescriptor>(model);
+            await _workDayService.EditReportAsync(descriptor);
         }
     }
 }

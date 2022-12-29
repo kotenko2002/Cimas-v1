@@ -8,6 +8,7 @@ namespace Cimas.Storage.Repositories.Reports
 {
     public interface IReportRepository : IBaseRepository<Report>
     {
-        Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int cinemaId);
+        Task<Report> GetFullReportByReportId(int cinemaId);
+        Task<IEnumerable<ShortReportForReviewerView>> GetShortReportsByCinemaId(int cinemaId);
     }
 }
