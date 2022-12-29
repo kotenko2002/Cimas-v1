@@ -28,6 +28,8 @@ namespace Cimas.Storage.Repositories.Reports
                 {
                     Id = report.Id,
                     WorkDayId = report.WorkDayId,
+                    CinemaId = report.WorkDay.CinemaId,
+                    CinemaName = report.WorkDay.Cinema.Name,
                     WorkerName = report.WorkDay.User.Name,
                     WorkerRole = report.WorkDay.User.Role,
                     StartDateTime = report.WorkDay.StartDateTime,

@@ -10,6 +10,7 @@ using System;
 using Cimas.Сommon.Enums;
 using Cimas.Сommon.Exceptions;
 using Cimas.Entities.Products;
+using Cimas.Storage.Repositories.SessionSeats.Filters;
 
 namespace Cimas.Service.WorkDays
 {
@@ -101,13 +102,21 @@ namespace Cimas.Service.WorkDays
             await _uow.CompleteAsync();
         }
 
-        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int cinemaId)
+        public async Task<IEnumerable<FullReportView>> GetReportsListByCompanyIdAsync(int companyId)
         {
-            var views = await _uow.ReportRepository.GetReportsListByCompanyIdAsync(cinemaId);
+            var views = await _uow.ReportRepository.GetReportsListByCompanyIdAsync(companyId);
 
             foreach (var view in views)
             {
                 view.Profit = await _uow.ProductRepository.GetProfitByWorkDayId(view.WorkDayId);
+
+                var filter = new CountProfitFilter()
+                {
+                    CinemaId = view.CinemaId,
+                    StartDateTime = view.StartDateTime,
+                    EndDateTime = view.EndDateTime
+                };
+                view.Profit += await _uow.SessionSeatRepository.GetProfit(filter);
             }
 
             return views;

@@ -7,6 +7,8 @@ namespace Cimas.Storage.Repositories.Reports.Views
     {
         public int Id { get; set; }
         public int WorkDayId { get; set; }
+        public int CinemaId { get; set; }
+        public string CinemaName { get; set; }
         public string WorkerName { get; set; }
         public Role WorkerRole { get; set; }
         public decimal Profit { get; set; }
