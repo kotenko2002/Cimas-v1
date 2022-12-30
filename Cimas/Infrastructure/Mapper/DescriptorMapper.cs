@@ -47,7 +47,7 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<WorkDay, WorkDayReponse>();
             CreateMap<Product, ProductResponse>();
 
-            CreateMap<SessionView, SessionResponse>()
+            CreateMap<Storage.Repositories.Sessions.Views.SessionView, SessionResponse>()
                 .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartDateTime.ToString("HH:mm")))
                 .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndDateTime.ToString("HH:mm")));
 
@@ -59,6 +59,11 @@ namespace Cimas.Infrastructure.Mapper
             CreateMap<FullReportView, FullReportResponse>()
                 .ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToString("dd/MM/yyyy HH:mm")))
                 .ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.ToString("dd/MM/yyyy HH:mm")));
+
+            CreateMap<SessionReportView, SessionReportResponse>()
+                .ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToString("dd/MM/yyyy HH:mm")))
+                .ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.ToString("dd/MM/yyyy HH:mm")));
+            
         }
     }
 }

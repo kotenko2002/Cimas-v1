@@ -10,5 +10,6 @@ namespace Cimas.Storage.Repositories.SessionSeats
     {
         Task<IEnumerable<SessionSeat>> GetSeatsBySessionIdAsync(int sessionId);
         Task<decimal> GetProfit(CountProfitFilter filter);
+        Task<IEnumerable<SessionSeat>> GetSessionsInfoAsync(CountProfitFilter filter);
     }
 }

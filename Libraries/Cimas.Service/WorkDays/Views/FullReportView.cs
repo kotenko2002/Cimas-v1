@@ -1,5 +1,7 @@
-﻿using Cimas.Сommon.Enums;
+﻿using Cimas.Entities.Products;
+using Cimas.Сommon.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Cimas.Service.WorkDays.Views
 {
@@ -13,5 +15,7 @@ namespace Cimas.Service.WorkDays.Views
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public RepostStatus Status { get; set; }
+        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<SessionReportView> Sessions { get; set; }
     }
 }

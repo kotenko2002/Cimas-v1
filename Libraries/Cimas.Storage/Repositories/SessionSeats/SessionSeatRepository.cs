@@ -29,9 +29,20 @@ namespace Cimas.Storage.Repositories.SessionSeats
             return await Sourse.Where(seat => seat.DateTime != null && seat.Status == Сommon.Enums.SeatStatus.Occupied
                 && seat.DateTime >= filter.StartDateTime && seat.DateTime <= filter.EndDateTime)
                 .Include(seat => seat.Session)
-                .ThenInclude(session => session.Hall)
+                    .ThenInclude(session => session.Hall)
                 .Where(seat => seat.Session.Hall.CinemaId == filter.CinemaId)
                 .SumAsync(seat => seat.Session.TicketPrice);
+        }
+
+        public async Task<IEnumerable<SessionSeat>> GetSessionsInfoAsync(CountProfitFilter filter)
+        {
+            return await Sourse.Where(seat => seat.DateTime != null && seat.Status == Сommon.Enums.SeatStatus.Occupied
+                && seat.DateTime >= filter.StartDateTime && seat.DateTime <= filter.EndDateTime)
+                .Include(seat => seat.Session)
+                    .ThenInclude(session => session.Hall)
+                .Include(seat => seat.Session.Film)
+                .Where(seat => seat.Session.Hall.CinemaId == filter.CinemaId)
+                .ToListAsync();
         }
     }
 }

@@ -109,10 +109,7 @@ namespace Cimas.Service.Sessions
 
                 seat.Status = descriptor.Status;
 
-                if(seat.Status == SeatStatus.Occupied)
-                {
-                    seat.DateTime = currentDataTime;
-                }
+                seat.DateTime = seat.Status == SeatStatus.Occupied ? currentDataTime : null;
             }
 
             await _uow.CompleteAsync();

@@ -12,6 +12,7 @@ using Cimas.Сommon.Exceptions;
 using Cimas.Entities.Products;
 using Cimas.Storage.Repositories.SessionSeats.Filters;
 using Cimas.Service.WorkDays.Views;
+using Cimas.Entities.Sessions;
 
 namespace Cimas.Service.WorkDays
 {
@@ -124,7 +125,6 @@ namespace Cimas.Service.WorkDays
             };
 
             view.Profit += await _uow.ProductRepository.GetProfitByWorkDayId(report.WorkDayId);
-
             var filter = new CountProfitFilter()
             {
                 CinemaId = report.WorkDay.CinemaId,
@@ -133,6 +133,26 @@ namespace Cimas.Service.WorkDays
             };
             view.Profit += await _uow.SessionSeatRepository.GetProfit(filter);
 
+            view.Products = await _uow.ProductRepository.GetProductsByWorkDayIdAsync(report.WorkDayId);
+            var seats = await _uow.SessionSeatRepository.GetSessionsInfoAsync(filter);
+
+            var groups = seats.GroupBy(item => item.SessionId);
+            List<SessionReportView> sessionList = new List<SessionReportView>();
+            foreach (var group in groups)
+            {
+                SessionReportView session = new SessionReportView()
+                {
+                    Id = group.Key,
+                    FilmName = group.First().Session.Film.Name,
+                    StartDateTime = group.First().Session.StartDateTime,
+                    EndDateTime = group.First().Session.EndDateTime,
+                    Price = group.First().Session.TicketPrice,
+                    SoldTickets = group.Count()
+                };
+                sessionList.Add(session);
+            }
+
+            view.Sessions = sessionList;
             return view;
         }
 
