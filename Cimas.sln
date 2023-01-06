@@ -3,19 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimas", "Cimas\Cimas.csproj", "{F4E2AF57-820B-4D36-BBBD-82F3FF46D6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cimas", "Cimas\Cimas.csproj", "{F4E2AF57-820B-4D36-BBBD-82F3FF46D6C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{BB3BF17C-5FE5-4F31-BAE6-7521539E0803}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{AF75E1D5-2D18-45B4-8F11-20A86AB007CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimas.Entities", "Libraries\Cimas.Entities\Cimas.Entities.csproj", "{7DC3CCFB-E3CC-4F33-9DE9-42D65D0528DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cimas.Entities", "Libraries\Cimas.Entities\Cimas.Entities.csproj", "{7DC3CCFB-E3CC-4F33-9DE9-42D65D0528DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimas.Сommon", "Libraries\Cimas.Сommon\Cimas.Сommon.csproj", "{9F029FE0-09A6-46EA-8C1F-3C6F85B34FEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cimas.Сommon", "Libraries\Cimas.Сommon\Cimas.Сommon.csproj", "{9F029FE0-09A6-46EA-8C1F-3C6F85B34FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimas.Service", "Libraries\Cimas.Service\Cimas.Service.csproj", "{C7490297-AEEB-4689-8638-B196F073466A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cimas.Service", "Libraries\Cimas.Service\Cimas.Service.csproj", "{C7490297-AEEB-4689-8638-B196F073466A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimas.Storage", "Libraries\Cimas.Storage\Cimas.Storage.csproj", "{C8D6BEC9-4C67-407C-8BD1-025D9AFF8981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cimas.Storage", "Libraries\Cimas.Storage\Cimas.Storage.csproj", "{C8D6BEC9-4C67-407C-8BD1-025D9AFF8981}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{644D6F77-2081-48CE-B61F-DACEEC94BACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cimas.Tests", "Tests\Cimas.Tests\Cimas.Tests.csproj", "{2055AC8F-E308-46CE-8ED5-1414A599D34D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{C8D6BEC9-4C67-407C-8BD1-025D9AFF8981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8D6BEC9-4C67-407C-8BD1-025D9AFF8981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8D6BEC9-4C67-407C-8BD1-025D9AFF8981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2055AC8F-E308-46CE-8ED5-1414A599D34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2055AC8F-E308-46CE-8ED5-1414A599D34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2055AC8F-E308-46CE-8ED5-1414A599D34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2055AC8F-E308-46CE-8ED5-1414A599D34D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +61,7 @@ Global
 		{9F029FE0-09A6-46EA-8C1F-3C6F85B34FEB} = {AF75E1D5-2D18-45B4-8F11-20A86AB007CF}
 		{C7490297-AEEB-4689-8638-B196F073466A} = {AF75E1D5-2D18-45B4-8F11-20A86AB007CF}
 		{C8D6BEC9-4C67-407C-8BD1-025D9AFF8981} = {AF75E1D5-2D18-45B4-8F11-20A86AB007CF}
+		{2055AC8F-E308-46CE-8ED5-1414A599D34D} = {644D6F77-2081-48CE-B61F-DACEEC94BACC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95924DAA-3838-4DDC-A77B-52C397195019}
